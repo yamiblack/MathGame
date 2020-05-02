@@ -35,56 +35,56 @@ public class IntroPage extends Activity {
             login_b = (Button) findViewById(R.id.imageButton2);             //이미지버튼?
 
 
-            login_b.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    //화면전환할 클래스명을 입력한다.
-                    Intent intent1 = new Intent(getApplicationContext(),DifficultyPopup.class);
-                    startActivity(intent1);
-                }
-            });
+//            login_b.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//                    //화면전환할 클래스명을 입력한다.
+//                    Intent intent1 = new Intent(getApplicationContext(),DifficultyPopup.class);
+//                    startActivity(intent1);
+//                }
+//            });
 
-            Game_b.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    //화면전환할 클래스명을 입력한다.
-                    Intent intent1 = new Intent(getApplicationContext(),DifficultyPopup.class);
-                    startActivity(intent1);
-                }
-            });
-
-            Rank_b.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //화면전환할 클래스명을 입력한다.
-                Intent intent1 = new Intent(getApplicationContext(),DifficultyPopup.class);
-                startActivity(intent1);
-            }
-            });
-
-        Mypage_b.setOnClickListener(new View.OnClickListener() {
-                @Override
-        public void onClick(View view) {
-            //화면전환할 클래스명을 입력한다.
-            Intent intent1 = new Intent(getApplicationContext(),MyPage.class);
-            startActivity(intent1);
-        }
-        });
-
-
-        Settings_b.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //화면전환할 클래스명을 입력한다.
-                Intent intent1 = new Intent(getApplicationContext(),Setting.class);
-                startActivity(intent1);
-            }
-        });
-
-    }
-
-    public void mOnPopupClick(View view) {
-        Intent intent = new Intent(this,DifficultyPopup.class);
-        startActivityForResult(intent, 1);
+//            Game_b.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//                    //화면전환할 클래스명을 입력한다.
+//                    Intent intent1 = new Intent(getApplicationContext(),DifficultyPopup.class);
+//                    startActivity(intent1);
+//                }
+//            });
+//
+//            Rank_b.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                //화면전환할 클래스명을 입력한다.
+//                Intent intent1 = new Intent(getApplicationContext(),DifficultyPopup.class);
+//                startActivity(intent1);
+//            }
+//            });
+//
+//        Mypage_b.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//        public void onClick(View view) {
+//            //화면전환할 클래스명을 입력한다.
+//            Intent intent1 = new Intent(getApplicationContext(),MyPage.class);
+//            startActivity(intent1);
+//        }
+//        });
+//
+//
+//        Settings_b.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                //화면전환할 클래스명을 입력한다.
+//                Intent intent1 = new Intent(getApplicationContext(),Setting.class);
+//                startActivity(intent1);
+//            }
+//        });
+//
+//    }
+//
+//    public void mOnPopupClick(View view) {
+//        Intent intent = new Intent(this,DifficultyPopup.class);
+//        startActivityForResult(intent, 1);
     }
 }

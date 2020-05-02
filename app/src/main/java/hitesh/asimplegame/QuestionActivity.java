@@ -39,7 +39,7 @@ public class QuestionActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        QuizDBOpenHelper db = new QuizDBOpenHelper(this);  // my question bank class
+        EasyDBOpenHelper db = new EasyDBOpenHelper(this);  // my question bank class
         questionList = db.getAllQuestions();  // this will fetch all quetonall questions
         currentQ = questionList.get(questionID); // the current question
 

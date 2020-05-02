@@ -7,7 +7,8 @@ public class EasyRandom extends Question {
     int questionNumber1;
     int questionNumber2;
 
-    int maxNumber = 99;
+    int maxNumber1 = 99;
+    int maxNumber2 = 9;
     int minNumber = 1;
 
     int answerNumber;
@@ -26,8 +27,8 @@ public class EasyRandom extends Question {
 
     public EasyRandom() {
 
-        questionNumber1 = randomNumber.nextInt(maxNumber - minNumber + 1) + minNumber;
-        questionNumber2 = randomNumber.nextInt(maxNumber - minNumber + 1) + minNumber;
+        questionNumber1 = randomNumber.nextInt(maxNumber1 - minNumber + 1) + minNumber;
+        questionNumber2 = randomNumber.nextInt(maxNumber2 - minNumber + 1) + minNumber;
 
         answerNumber = questionNumber1 + questionNumber2;
 
@@ -38,18 +39,16 @@ public class EasyRandom extends Question {
         option[3] = -2;
 
 
-        for (int i = 0; i < 2; i++) {
+        for (int i = 0; i < 3; i++) {
             extraNumber = randomNumber.nextInt(10);
-            option[randomNumber.nextInt(3)] = answerNumber + extraNumber;
+            option[i] = answerNumber + extraNumber;
         }
 
-        for (int i = 0; i < 3; i++) {
-            if (option[i] == -1) {
-                option[i] = answerNumber;
-            }
+        option[randomNumber.nextInt(3)] = answerNumber;
 
+        for (int i = 0; i < 4; i++) {
             if (option[i] == option[i + 1]) {
-                option[i] += randomNumber.nextInt(10) + 1;
+                option[i] += randomNumber.nextInt(10) + 9;
             }
         }
 
@@ -58,6 +57,7 @@ public class EasyRandom extends Question {
         optionC = option[2];
 
     }
+
 
     @Override
     public String getQUESTION() {

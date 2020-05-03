@@ -11,7 +11,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class EasyDBOpenHelper extends SQLiteOpenHelper {
 
-    private static final int DATABASE_VERSION = 9;
+    private static final int DATABASE_VERSION = 25;
     // Database Name
     private static final String DATABASE_NAME = "mathsone";
     // tasks table name
@@ -26,7 +26,7 @@ public class EasyDBOpenHelper extends SQLiteOpenHelper {
 
     private static final int entireNumberOfQuestions = 21;
     //test...
-    
+
     EasyRandom[] numberOfQuestions = new EasyRandom[entireNumberOfQuestions];
 
     private SQLiteDatabase database;

@@ -46,7 +46,15 @@ public class EasyRandom extends Question {
 
         option[randomNumber.nextInt(3)] = answerNumber;
 
-        for (int i = 0; i < 4; i++) {
+//        while (option[0] != option[1] && option[0] != option[1] && option[1] != option[2]) {
+//            for (int i = 0; i < 3; i++) {
+//                if (option[i] == option[i + 1]) {
+//                    option[i] += randomNumber.nextInt(10) + 9;
+//                }
+//            }
+//        }
+
+        for (int i = 0; i < 3; i++) {
             if (option[i] == option[i + 1]) {
                 option[i] += randomNumber.nextInt(10) + 9;
             }

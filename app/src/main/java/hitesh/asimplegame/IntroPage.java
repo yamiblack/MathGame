@@ -16,7 +16,7 @@ public class IntroPage extends Activity {
     Button Mypage_b;
     Button Settings_b;
     Button Rank_b;
-    Button login_b;
+    ImageButton login_b;
 
     public boolean onCreateOptionsMenu(Menu menu){
         getMenuInflater().inflate(R.menu.main, menu);
@@ -32,7 +32,7 @@ public class IntroPage extends Activity {
             Mypage_b = (Button) findViewById(R.id.button5);
             Settings_b = (Button) findViewById(R.id.button6);
             Rank_b = (Button) findViewById(R.id.button);
-            login_b = (Button) findViewById(R.id.imageButton2);             //이미지버튼?
+            login_b = (ImageButton) findViewById(R.id.imageButton2);             //이미지버튼?
 
 
             login_b.setOnClickListener(new View.OnClickListener() {
@@ -48,7 +48,7 @@ public class IntroPage extends Activity {
                 @Override
                 public void onClick(View view) {
                     //화면전환할 클래스명을 입력한다.
-                    Intent intent1 = new Intent(getApplicationContext(),DifficultyPopup.class);
+                    Intent intent1 = new Intent(getApplicationContext(),QuestionActivity.class);
                     startActivity(intent1);
                 }
             });

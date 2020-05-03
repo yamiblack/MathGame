@@ -1,9 +1,5 @@
 package hitesh.asimplegame;
 
-/**
- * Created by H on 7/12/2015.
- */
-
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -147,7 +143,7 @@ public class QuestionActivity extends Activity {
             finish();
 
         }
-        
+
     }
 
 

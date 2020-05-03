@@ -135,8 +135,39 @@
                     android:text="32"
                     android:textColor="#000000"
                     android:textSize="25.0sp" />
+
+
             </LinearLayout>
+
+            <Button
+                android:id="@+id/button11"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="80dp"
+                android:layout_marginRight="80dp"
+                android:layout_marginTop="5dp"
+                android:background="#fff"
+                android:gravity="center"
+                android:text="Pause"
+                android:textColor="#000000"
+                android:textSize="25.0sp" />
+
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="80dp"
+                android:layout_marginRight="80dp"
+                android:layout_marginTop="5dp"
+                android:background="#fff"
+                android:gravity="center"
+                android:text="Start"
+                android:textColor="#000000"
+                android:textSize="25.0sp" />
         </LinearLayout>
+
+
     </LinearLayout>
 
 </LinearLayout>

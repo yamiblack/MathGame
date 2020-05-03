@@ -30,7 +30,7 @@ public class QuestionActivity extends Activity {
 
     private Question currentQ;
     private TextView txtQuestion, times, scored;
-    private Button button1, button2, button3;
+    private Button button1, button2, button3, pauseButton, startButton;
 
 
     @Override
@@ -63,7 +63,7 @@ public class QuestionActivity extends Activity {
         times.setText("00:02:00");
 
 //        // A timer of 60 seconds to play for, with an interval of 1 second (1000 milliseconds)
-        CounterClass timer = new CounterClass(60000, 1000);
+        final CounterClass timer = new CounterClass(60000, 1000);
         timer.start();
 
 
@@ -72,7 +72,7 @@ public class QuestionActivity extends Activity {
             @Override
             public void onClick(View v) {
                 // passing the button text to other method
-                // to check whether the anser is correct or not
+                // to check whether the answer is correct or not
                 // same for all three buttons
                 getAnswer(button1.getText().toString());
 
@@ -94,6 +94,20 @@ public class QuestionActivity extends Activity {
 
             }
         });
+
+//        pauseButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//            }
+//        });
+//
+//        startButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                timer.
+//            }
+//        });
     }
 
     public void getAnswer(String AnswerString) {

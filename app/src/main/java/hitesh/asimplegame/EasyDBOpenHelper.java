@@ -25,7 +25,8 @@ public class EasyDBOpenHelper extends SQLiteOpenHelper {
     private static final String KEY_OPTC = "optc"; // option c
 
     private static final int entireNumberOfQuestions = 21;
-
+    //test...
+    
     EasyRandom[] numberOfQuestions = new EasyRandom[entireNumberOfQuestions];
 
     private SQLiteDatabase database;

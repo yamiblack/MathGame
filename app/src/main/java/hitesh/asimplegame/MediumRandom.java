@@ -4,13 +4,14 @@ import java.util.Random;
 
 import hitesh.asimplegame.Question;
 
-public class EasyRandom extends Question {
+public class MediumRandom extends Question {
+
 
     int questionNumber1;
     int questionNumber2;
 
-    int maxNumber1 = 99;
-    int maxNumber2 = 9;
+    int maxNumber1 = 999;
+    int maxNumber2 = 99;
     int minNumber = 1;
 
     int answerNumber;
@@ -27,7 +28,7 @@ public class EasyRandom extends Question {
 
     Random randomNumber = new Random();
 
-    public EasyRandom() {
+    public MediumRandom() {
 
         questionNumber1 = randomNumber.nextInt(maxNumber1 - minNumber + 1) + minNumber;
         questionNumber2 = randomNumber.nextInt(maxNumber2 - minNumber + 1) + minNumber;
@@ -53,7 +54,7 @@ public class EasyRandom extends Question {
             }
         }
 
-        if(option[2] == option[0]) {
+        if (option[2] == option[0]) {
             option[2] += randomNumber.nextInt(11) + 10;
         }
 
@@ -88,5 +89,5 @@ public class EasyRandom extends Question {
     public String getOPTC() {
         return String.valueOf(optionC);
     }
-}
 
+}

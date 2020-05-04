@@ -32,44 +32,31 @@ public class QuestionActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        super.onCreate(savedInstanceState);
+//        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        EasyDBOpenHelper db = new EasyDBOpenHelper(this);  // my question bank class
-        questionList = db.getAllQuestions();  // this will fetch all quetonall questions
-        currentQ = questionList.get(questionID); // the current question
+        QuestionDBOpenHelper db = new QuestionDBOpenHelper(this);
+        questionList = db.getAllQuestions();
+        currentQ = questionList.get(questionID);
 
         txtQuestion = (TextView) findViewById(R.id.txtQuestion);
-        // the textview in which the question will be displayed
 
-        // the three buttons,
-        // the idea is to set the text of three buttons with the options from question bank
         button1 = (Button) findViewById(R.id.button1);
         button2 = (Button) findViewById(R.id.button2);
         button3 = (Button) findViewById(R.id.button3);
 
-        // the textview in which score will be displayed
         scored = (TextView) findViewById(R.id.score);
 
-        // the timer
         times = (TextView) findViewById(R.id.timers);
 
-        // method which will set the things up for our game
         setQuestionView();
-//        times.setText("00:02:00");
 
-//        // A timer of 60 seconds to play for, with an interval of 1 second (1000 milliseconds)
         final CounterClass timer = new CounterClass(60000, 1000);
         timer.start();
 
-
-        // button click listeners
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // passing the button text to other method
-                // to check whether the answer is correct or not
-                // same for all three buttons
                 getAnswer(button1.getText().toString());
 
              }
@@ -94,7 +81,6 @@ public class QuestionActivity extends Activity {
 //        pauseButton.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {
-//                timer.cancel();
 //
 //            }
 //        });
@@ -102,7 +88,7 @@ public class QuestionActivity extends Activity {
 //        startButton.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {
-//                timer.
+//
 //            }
 //        });
     }

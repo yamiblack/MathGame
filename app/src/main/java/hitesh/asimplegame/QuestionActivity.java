@@ -55,7 +55,6 @@ public class QuestionActivity extends Activity {
             questionList = db.getAllHardQuestions();
         }
 
-
         currentQ = questionList.get(questionID);
 
         txtQuestion = (TextView) findViewById(R.id.txtQuestion);

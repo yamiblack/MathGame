@@ -9,6 +9,7 @@
         android:orientation="vertical"
         android:gravity="center"
         android:background="#86E57F">
+
         <Button
             android:id="@+id/btn_game"
             android:layout_width="fill_parent"
@@ -46,6 +47,7 @@
             android:layout_marginTop="5dp"
             android:text="Settings" />
 
+
     </LinearLayout>
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar2"
@@ -63,14 +65,14 @@
         android:textSize="20sp"
         android:text="A Simple Game"
         />
-
-    <ImageButton
+    <Button
         android:id="@+id/btn_signin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="13dp"
-        android:layout_marginLeft="360dp"
-        app:srcCompat="@android:drawable/ic_secure" />
+        android:layout_marginLeft="310dp"
+        android:layout_marginTop="5dp"
+        android:textSize="8sp"
+        android:text="Sign In" />
 
 
 </FrameLayout>

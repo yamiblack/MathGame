@@ -14,7 +14,7 @@ public class MainPage extends Activity {
     Button btnMypage;
     Button btnSettings;
     Button btnRanking;
-    ImageButton btnSignin;
+    Button btnSignIn;
 
     public boolean onCreateOptionsMenu(Menu menu){
         getMenuInflater().inflate(R.menu.main, menu);
@@ -30,10 +30,10 @@ public class MainPage extends Activity {
             btnMypage = (Button) findViewById(R.id.btn_mypage);
             btnSettings = (Button) findViewById(R.id.btn_settings);
             btnRanking = (Button) findViewById(R.id.btn_ranking);
-            btnSignin = (ImageButton) findViewById(R.id.btn_signin);             //이미지버튼?
+            btnSignIn = (Button) findViewById(R.id.btn_signin);             //이미지버튼?
 
 
-            btnSignin.setOnClickListener(new View.OnClickListener() {
+            btnSignIn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
 

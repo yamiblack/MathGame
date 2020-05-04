@@ -8,11 +8,17 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 
+import static hitesh.asimplegame.QuestionDBOpenHelper.setRandomDB;
+
+
 public class GameDifficultyPopup extends Activity {
 
     Button btnEasy;
     Button btnMedium;
     Button btnHard;
+    Button btnClose;
+
+    QuestionDBOpenHelper check;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,28 +37,46 @@ public class GameDifficultyPopup extends Activity {
         btnEasy = (Button) findViewById(R.id.btn_easy);
         btnMedium = (Button) findViewById(R.id.btn_medium);
         btnHard = (Button) findViewById(R.id.btn_hard);
+        btnClose = (Button) findViewById(R.id.btn_close);
 
         btnEasy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), QuestionActivity.class));
+                setRandomDB();
+                Intent intent = new Intent(getApplicationContext(), QuestionActivity.class);
+                intent.putExtra("Difficulty", "Easy");
+                startActivity(intent);
             }
         });
 
         btnMedium.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                startActivity(new Intent(getApplicationContext(), MediumActivity.class));
-
+                setRandomDB();
+                Intent intent = new Intent(getApplicationContext(), QuestionActivity.class);
+                intent.putExtra("Difficulty", "Medium");
+                startActivity(intent);
             }
         });
 
         btnHard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                setRandomDB();
+                Intent intent = new Intent(getApplicationContext(), QuestionActivity.class);
+                intent.putExtra("Difficulty", "Hard");
+                startActivity(intent);
 
             }
         });
 
+        btnClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                GameDifficultyPopup.super.onBackPressed();
+            }
+        });
+
     }
+
 }

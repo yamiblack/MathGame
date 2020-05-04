@@ -28,15 +28,34 @@ public class QuestionActivity extends Activity {
     private TextView txtQuestion, times, scored;
     private Button button1, button2, button3, pauseButton, startButton;
 
+    public static String difficulty;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Intent intent = getIntent();
+        String setDifficulty = intent.getExtras().getString("Difficulty");
         QuestionDBOpenHelper db = new QuestionDBOpenHelper(this);
-        questionList = db.getAllQuestions();
+
+        if (setDifficulty.equals("Easy")) {
+            difficulty = "Easy";
+            questionList = db.getAllEasyQuestions();
+        }
+
+        if (setDifficulty.equals("Medium")) {
+            difficulty = "Medium";
+            questionList = db.getAllMediumQuestions();
+        }
+
+        if (setDifficulty.equals("Hard")) {
+            difficulty = "Hard";
+            questionList = db.getAllHardQuestions();
+        }
+
+
         currentQ = questionList.get(questionID);
 
         txtQuestion = (TextView) findViewById(R.id.txtQuestion);
@@ -59,7 +78,7 @@ public class QuestionActivity extends Activity {
             public void onClick(View v) {
                 getAnswer(button1.getText().toString());
 
-             }
+            }
         });
 
         button2.setOnClickListener(new View.OnClickListener() {
@@ -136,8 +155,7 @@ public class QuestionActivity extends Activity {
 
     @TargetApi(Build.VERSION_CODES.GINGERBREAD)
     @SuppressLint("NewApi")
-    public class CounterClass extends CountDownTimer
-    {
+    public class CounterClass extends CountDownTimer {
         public CounterClass(long millisInFuture, long countDownInterval) {
             super(millisInFuture, countDownInterval);
         }
@@ -150,7 +168,7 @@ public class QuestionActivity extends Activity {
         @Override
         public void onTick(long millisUntilFinished) {
             long millis = millisUntilFinished;
-            String hms = String.format( "%02d:%02d:%02d",
+            String hms = String.format("%02d:%02d:%02d",
                     TimeUnit.MILLISECONDS.toHours(millis),
                     TimeUnit.MILLISECONDS.toMinutes(millis)
                             - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS

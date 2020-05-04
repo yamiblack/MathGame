@@ -74,7 +74,7 @@ public class MainPage extends Activity {
             @Override
             public void onClick(View view) {
 
-                startActivity(new Intent(getApplicationContext(), Ranking.class));
+                startActivity(new Intent(getApplicationContext(), QuestionActivity.class));
             }
             });
 
@@ -86,12 +86,12 @@ public class MainPage extends Activity {
         });
 
 
-        btnSettings.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), Setting.class));
-            }
-        });
+//        btnSettings.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                startActivity(new Intent(getApplicationContext(), Setting.class));
+//            }
+//        });
 
     }
 

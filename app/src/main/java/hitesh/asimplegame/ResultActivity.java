@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import static hitesh.asimplegame.QuestionDBOpenHelper.setRandomDB;
+
 
 public class ResultActivity extends Activity {
 
@@ -22,6 +24,7 @@ public class ResultActivity extends Activity {
 	}
 
 	public void playagain(View o) {
+			setRandomDB();
 			Intent intent = new Intent(this, QuestionActivity.class);
 			startActivity(intent);
 	}

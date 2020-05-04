@@ -22,7 +22,7 @@ public class Question extends Activity {
 	}
 
 	public Question(String question, String optA, String optB, String optC,
-			String answer) {
+					String answer) {
 		QUESTION = question;
 		OPTA = optA;
 		OPTB = optB;

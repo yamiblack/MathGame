@@ -1,17 +1,20 @@
 package hitesh.asimplegame;
 
-import java.util.Random;
-
-import hitesh.asimplegame.Question;
-
-public class EasyRandom extends Question {
+public class QuestionRandom extends Question {
 
     int questionNumber1;
     int questionNumber2;
 
-    int maxNumber1 = 99;
-    int maxNumber2 = 9;
-    int minNumber = 1;
+    int easyMaxNumber1 = 99;
+    int easyMaxNumber2 = 9;
+    int easyMinNumber = 1;
+
+    int mediumMaxNumber = 999;
+    int mediumMinNumber = 95;
+
+    int hardMaxNumber = 9999;
+    int hardMinNumber = 915;
+
 
     int answerNumber;
 
@@ -25,12 +28,25 @@ public class EasyRandom extends Question {
     int optionC;
 
 
-    Random randomNumber = new Random();
+    java.util.Random randomNumber = new java.util.Random();
 
-    public EasyRandom() {
+    public QuestionRandom(int difficulty) {
 
-        questionNumber1 = randomNumber.nextInt(maxNumber1 - minNumber + 1) + minNumber;
-        questionNumber2 = randomNumber.nextInt(maxNumber2 - minNumber + 1) + minNumber;
+        if (difficulty == 1) {
+            questionNumber1 = randomNumber.nextInt(easyMaxNumber1 - easyMinNumber + 1) + easyMinNumber;
+            questionNumber2 = randomNumber.nextInt(easyMaxNumber2 - easyMinNumber + 1) + easyMinNumber;
+        }
+
+        if (difficulty == 2) {
+            questionNumber1 = randomNumber.nextInt(mediumMaxNumber - mediumMinNumber + 1) + mediumMinNumber;
+            questionNumber2 = randomNumber.nextInt(easyMaxNumber1 - mediumMinNumber + 1) + mediumMinNumber;
+        }
+
+        if (difficulty == 3) {
+            questionNumber1 = randomNumber.nextInt(hardMaxNumber - hardMinNumber + 1) + hardMinNumber;
+            questionNumber2 = randomNumber.nextInt(mediumMaxNumber - hardMinNumber + 1) + hardMinNumber;
+        }
+
 
         answerNumber = questionNumber1 + questionNumber2;
 
@@ -53,7 +69,7 @@ public class EasyRandom extends Question {
             }
         }
 
-        if(option[2] == option[0]) {
+        if (option[2] == option[0]) {
             option[2] += randomNumber.nextInt(11) + 10;
         }
 

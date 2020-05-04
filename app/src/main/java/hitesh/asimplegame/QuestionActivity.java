@@ -56,7 +56,7 @@ public class QuestionActivity extends Activity {
 
         // method which will set the things up for our game
         setQuestionView();
-        times.setText("00:02:00");
+//        times.setText("00:02:00");
 
 //        // A timer of 60 seconds to play for, with an interval of 1 second (1000 milliseconds)
         final CounterClass timer = new CounterClass(60000, 1000);
@@ -94,10 +94,11 @@ public class QuestionActivity extends Activity {
 //        pauseButton.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {
+//                timer.cancel();
 //
 //            }
 //        });
-//
+
 //        startButton.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {

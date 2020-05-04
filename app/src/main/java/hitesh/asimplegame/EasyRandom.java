@@ -37,6 +37,7 @@ public class EasyRandom extends Question {
         }
 
         option[3] = -2;
+//        option[4] = -3;
 
 
         for (int i = 0; i < 3; i++) {
@@ -59,6 +60,18 @@ public class EasyRandom extends Question {
                 option[i] += randomNumber.nextInt(10) + 9;
             }
         }
+
+        if(option[2] == option[0]) {
+            option[2] += randomNumber.nextInt(11) + 10;
+        }
+
+//        for (int i = 0; i < 3; i++) {
+//            while (option[i] != option[i + 1] && option[i] != option[i + 2] && option[i + 1] != option[i + 2]) {
+//                if (option[i] == option[i + 1]) {
+//                    option[i] += randomNumber.nextInt(10) + 9;
+//                }
+//            }
+//        }
 
         optionA = option[0];
         optionB = option[1];

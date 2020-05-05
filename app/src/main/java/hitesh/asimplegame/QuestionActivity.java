@@ -75,6 +75,7 @@ public class QuestionActivity extends Activity {
         final CounterClass timer = new CounterClass(60000, 1000);
         timer.start();
 
+
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -167,7 +168,6 @@ public class QuestionActivity extends Activity {
             intent.putExtras(b); // Put your score to your next
             startActivity(intent);
             finish();
-
         }
 
     }
@@ -183,6 +183,15 @@ public class QuestionActivity extends Activity {
         @Override
         public void onFinish() {
             times.setText("Time is up");
+
+            Intent intent = new Intent(QuestionActivity.this, ResultActivity.class);
+
+            Bundle b = new Bundle();
+            b.putInt("score", score);
+            intent.putExtras(b);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+            finish();
         }
 
         @Override

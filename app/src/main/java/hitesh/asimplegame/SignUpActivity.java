@@ -1,6 +1,9 @@
 package hitesh.asimplegame;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -46,6 +49,21 @@ public class SignUpActivity extends Activity {
                 case R.id.btn_ok:
 //                Log.e("CLick", "Click");
                     signUp();
+
+                    AlertDialog.Builder ad = new AlertDialog.Builder(SignUpActivity.this);
+//                    ad.setIcon(R.mipmap.ic_launcher);
+                    ad.setTitle("Welcome!");
+                    ad.setMessage("Thank you for signing up!");
+                    ad.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            startActivity(new Intent(getApplicationContext(), MainPage.class));
+                        }
+                    });
+
+                    ad.show();
+
+//                    SignUpActivity.super.onBackPressed();
                     break;
             }
         }

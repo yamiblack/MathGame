@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "344195497453",
+    "firebase_url": "https://math-game-e728a.firebaseio.com",
+    "project_id": "math-game-e728a",
+    "storage_bucket": "math-game-e728a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:344195497453:android:6a4d674deba111b4043be4",
+        "android_client_info": {
+          "package_name": "hitesh.asimplegame"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "344195497453-dfovr175hpcb4vs8rs3f77qvfogirs0c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDXOz3UWbVGdDecdcPW654K2QWbRTSpEZ4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "344195497453-dfovr175hpcb4vs8rs3f77qvfogirs0c.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

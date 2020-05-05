@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="hitesh.asimplegame" >
+    package="hitesh.asimplegame">
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="A simple game"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme">
         <activity
             android:name=".MainPage"
             android:label="A Simple Game"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -28,7 +28,6 @@
         <activity
             android:name=".GameDifficultyPopup"
             android:theme="@android:style/Theme.Dialog" />
-            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

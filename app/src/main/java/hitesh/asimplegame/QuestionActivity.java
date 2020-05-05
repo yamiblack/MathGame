@@ -1,9 +1,6 @@
 package hitesh.asimplegame;
 
 
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
@@ -16,6 +13,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+import static hitesh.asimplegame.QuestionDBOpenHelper.setRandomDB;
+
 
 public class QuestionActivity extends Activity {
     private static final String TAG = QuestionActivity.class.getSimpleName();
@@ -26,7 +28,7 @@ public class QuestionActivity extends Activity {
 
     private Question currentQ;
     private TextView txtQuestion, times, scored;
-    private Button button1, button2, button3, pauseButton, startButton;
+    private Button button1, button2, button3, btnRestart;
 
     public static String difficulty;
 
@@ -37,8 +39,8 @@ public class QuestionActivity extends Activity {
         setContentView(R.layout.activity_main);
 
         Intent intent = getIntent();
-        String setDifficulty = intent.getExtras().getString("Difficulty");
-        QuestionDBOpenHelper db = new QuestionDBOpenHelper(this);
+        final String setDifficulty = intent.getExtras().getString("Difficulty");
+        final QuestionDBOpenHelper db = new QuestionDBOpenHelper(this);
 
         if (setDifficulty.equals("Easy")) {
             difficulty = "Easy";
@@ -62,6 +64,7 @@ public class QuestionActivity extends Activity {
         button1 = (Button) findViewById(R.id.button1);
         button2 = (Button) findViewById(R.id.button2);
         button3 = (Button) findViewById(R.id.button3);
+        btnRestart = (Button) findViewById(R.id.btn_restart);
 
         scored = (TextView) findViewById(R.id.score);
 
@@ -96,19 +99,37 @@ public class QuestionActivity extends Activity {
             }
         });
 
-//        pauseButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//            }
-//        });
+        btnRestart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-//        startButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//            }
-//        });
+                if (setDifficulty.equals("Easy")) {
+                    setRandomDB();
+                    Intent intent = new Intent(getApplicationContext(), QuestionActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    intent.putExtra("Difficulty", "Easy");
+                    startActivity(intent);
+                }
+
+                if (setDifficulty.equals("Medium")) {
+                    setRandomDB();
+                    Intent intent = new Intent(getApplicationContext(), QuestionActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    intent.putExtra("Difficulty", "Medium");
+                    startActivity(intent);
+                }
+
+                if (setDifficulty.equals("Hard")) {
+                    setRandomDB();
+                    Intent intent = new Intent(getApplicationContext(), QuestionActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    intent.putExtra("Difficulty", "Hard");
+                    startActivity(intent);
+                }
+            }
+        });
+
+
     }
 
     public void getAnswer(String AnswerString) {

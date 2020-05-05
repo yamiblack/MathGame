@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "344195497453-itrlu7kcekk292a7ltk5poiikk8bu1tp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "hitesh.asimplegame",
+            "certificate_hash": "1e8b783885b4aa6c9ba125598cffb4772b411df6"
+          }
+        },
+        {
           "client_id": "344195497453-dfovr175hpcb4vs8rs3f77qvfogirs0c.apps.googleusercontent.com",
           "client_type": 3
         }

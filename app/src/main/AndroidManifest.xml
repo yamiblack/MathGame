@@ -29,6 +29,9 @@
             android:name=".QuestionActivity"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".RankingActivity"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".ResultActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" />

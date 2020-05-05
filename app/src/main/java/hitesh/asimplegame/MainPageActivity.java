@@ -60,7 +60,7 @@ public class MainPageActivity extends Activity {
             @Override
             public void onClick(View view) {
 
-                startActivity(new Intent(getApplicationContext(), QuestionActivity.class));
+                startActivity(new Intent(getApplicationContext(), RankingActivity.class));
             }
             });
 

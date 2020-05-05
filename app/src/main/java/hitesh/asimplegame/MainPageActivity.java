@@ -16,7 +16,6 @@ public class MainPageActivity extends Activity {
     Button btnSettings;
     Button btnRanking;
     Button btnSignOut;
-    Button btnSignUp;
 
     public boolean onCreateOptionsMenu(Menu menu){
         getMenuInflater().inflate(R.menu.main, menu);
@@ -88,6 +87,8 @@ public class MainPageActivity extends Activity {
     }
 
     private void startSignInActivity() {
-        startActivity(new Intent(getApplicationContext(), SignInActivity.class));
+        Intent intent = new Intent(this, SignInActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
     }
 }

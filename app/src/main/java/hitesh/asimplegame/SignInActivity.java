@@ -42,6 +42,14 @@ public class SignInActivity extends Activity {
 //        updateUI(currentUser);
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        moveTaskToBack(true);
+        android.os.Process.killProcess(android.os.Process.myPid());
+        System.exit(1);
+    }
+
     View.OnClickListener onClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
@@ -96,6 +104,8 @@ public class SignInActivity extends Activity {
     }
 
     private void startSignUpActivity() {
-        startActivity(new Intent(getApplicationContext(), SignUpActivity.class));
+        Intent intent = new Intent(this, SignUpActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
     }
 }

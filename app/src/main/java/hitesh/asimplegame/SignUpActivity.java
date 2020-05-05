@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -49,44 +50,64 @@ public class SignUpActivity extends Activity {
                 case R.id.btn_ok:
 //                Log.e("CLick", "Click");
                     signUp();
-
-                    AlertDialog.Builder ad = new AlertDialog.Builder(SignUpActivity.this);
-//                    ad.setIcon(R.mipmap.ic_launcher);
-                    ad.setTitle("Welcome!");
-                    ad.setMessage("Thank you for signing up!");
-                    ad.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            startActivity(new Intent(getApplicationContext(), MainPage.class));
-                        }
-                    });
-
-                    ad.show();
-
-//                    SignUpActivity.super.onBackPressed();
                     break;
             }
         }
     };
 
     private void signUp() {
-        String email = ((EditText)findViewById(R.id.emailEditText)).getText().toString();
-        String password = ((EditText)findViewById(R.id.passwordEditText)).getText().toString();
+        String email = ((EditText) findViewById(R.id.emailEditText)).getText().toString();
+        String password = ((EditText) findViewById(R.id.passwordEditText)).getText().toString();
+        String passwordCheck = ((EditText) findViewById(R.id.verifyPasswordEditText)).getText().toString();
 
 
-        mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d(TAG, "createUserWithEmail:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                        }
-                    }
-                });
+        if (email.length() > 0 && password.length() > 0 && passwordCheck.length() > 0) {
+
+            if (passwordCheck.equals(password)) {
+                mAuth.createUserWithEmailAndPassword(email, password)
+                        .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                if (task.isSuccessful()) {
+                                    Log.d(TAG, "createUserWithEmail:success");
+                                    FirebaseUser user = mAuth.getCurrentUser();
+                                    startToast("Sign-up is successful!");
+
+
+                                    AlertDialog.Builder ad = new AlertDialog.Builder(SignUpActivity.this);
+                                    ad.setTitle("Welcome!");
+                                    ad.setMessage("Thank you for signing up!");
+                                    ad.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            startActivity(new Intent(getApplicationContext(), MainPageActivity.class));
+                                        }
+                                    });
+
+                                    ad.show();
+
+
+                                } else {
+                                    if (task.getException() != null) {
+                                        startToast(task.getException().toString());
+                                    }
+                                    Log.w(TAG, "createUserWithEmail:failure", task.getException());
+                                }
+                            }
+                        });
+
+            } else {
+                Toast.makeText(this, "Check your password again", Toast.LENGTH_SHORT).show();
+            }
+
+        } else {
+            startToast("Please enter your email or password. ");
+        }
+
+
+    }
+
+    private void startToast(String msg) {
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
 }

@@ -44,6 +44,7 @@ public class GameDifficultyPopup extends Activity {
             public void onClick(View view) {
                 setRandomDB();
                 Intent intent = new Intent(getApplicationContext(), QuestionActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.putExtra("Difficulty", "Easy");
                 startActivity(intent);
             }
@@ -54,6 +55,7 @@ public class GameDifficultyPopup extends Activity {
             public void onClick(View view) {
                 setRandomDB();
                 Intent intent = new Intent(getApplicationContext(), QuestionActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.putExtra("Difficulty", "Medium");
                 startActivity(intent);
             }
@@ -64,6 +66,7 @@ public class GameDifficultyPopup extends Activity {
             public void onClick(View view) {
                 setRandomDB();
                 Intent intent = new Intent(getApplicationContext(), QuestionActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.putExtra("Difficulty", "Hard");
                 startActivity(intent);
 

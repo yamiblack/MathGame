@@ -25,9 +25,11 @@ public class PracticeActivity extends Activity {
     private List<Question> questionList;
     private int score = 0;
     private int questionID = 0;
+    private int life = 998;
+    private int showLife = life + 1;
 
     private Question currentQ;
-    private TextView txtQuestion, times, scored;
+    private TextView txtQuestion, times, scored, txtLife;
     private Button button1, button2, button3, btnRestart;
 
     public static String difficulty;
@@ -57,8 +59,10 @@ public class PracticeActivity extends Activity {
         btnRestart = (Button) findViewById(R.id.btn_restart);
 
         scored = (TextView) findViewById(R.id.score);
-
+        txtLife = (TextView) findViewById(R.id.btn_life);
         times = (TextView) findViewById(R.id.timers);
+
+        txtLife.setText("Life : 999");
 
         setQuestionView();
 
@@ -116,20 +120,24 @@ public class PracticeActivity extends Activity {
             scored.setText("Score : " + score);
 
         } else {
-            // if unlucky start activity and finish the game
-            Intent intent = new Intent(PracticeActivity.this, ResultActivity.class);
 
-            // passing the int value
-            Bundle b = new Bundle();
-            b.putInt("score", score); // Your score
-            intent.putExtras(b); // Put your score to your next
-            startActivity(intent);
-            finish();
+            if (life == 0) {
+                Intent intent = new Intent(PracticeActivity.this, ResultActivity.class);
 
+                Bundle b = new Bundle();
+                b.putInt("score", score); // Your score
+                intent.putExtras(b); // Put your score to your next
+                startActivity(intent);
+                finish();
+            } else {
+                life--;
+                showLife--;
+                txtLife.setText("Life : " + showLife);
+            }
         }
 
 
-        if (questionID < 20) {
+        if (questionID < 999) {
             // if questions are not over then do this
             currentQ = questionList.get(questionID);
             setQuestionView();

@@ -1,66 +1,51 @@
 package hitesh.asimplegame;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ListView;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class RankingActivity extends AppCompatActivity {
+public class RankingActivity extends Activity {
 
-    private RecyclerView recyclerView;
-    private RecyclerView.Adapter adapter;
-    private RecyclerView.LayoutManager layoutManager;
-    private ArrayList<RankingInformation> arrayList;
-    private FirebaseDatabase database;
-    private DatabaseReference databaseReference;
-
-
+    ListView lvRanking;
+    Button btnBackToMainpage;
+    List<RankingInformation> rankingInformationsList;
+    QuestionDBOpenHelper dbOpenHelper = new QuestionDBOpenHelper(this);
+    RankingAdapter rankingAdapter;
+    int maxRanking;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ranking);
 
-        recyclerView = findViewById(R.id.recyclerView);
-        recyclerView.setHasFixedSize(true);
-        layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
-        arrayList = new ArrayList<>();
 
-        database = FirebaseDatabase.getInstance();
+        lvRanking = (ListView) findViewById(R.id.lv_ranking);
+        btnBackToMainpage = (Button) findViewById(R.id.btn_backToMainpage);
 
-        databaseReference = database.getReference("RankingInformation");
+        rankingInformationsList = dbOpenHelper.getChallengeRanking();
+        rankingAdapter =new RankingAdapter(this, (ArrayList<RankingInformation>) rankingInformationsList);
+        lvRanking.setAdapter(rankingAdapter);
 
-        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                arrayList.clear();
-                for(DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    RankingInformation rankingInformation = snapshot.getValue(RankingInformation.class);
-                    arrayList.add(rankingInformation);
-                }
-                adapter.notifyDataSetChanged();
-            }
+        maxRanking = rankingInformationsList.size();
+
+        if(maxRanking > 5) {
+            maxRanking = 5;
+        }
+
+        btnBackToMainpage.setOnClickListener(new View.OnClickListener() {
 
             @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                Log.e("RankingActivity", String.valueOf(databaseError.toException()));
-
+            public void onClick(View view) {
+                Intent intent = new Intent(RankingActivity.this, MainPageActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
             }
         });
-
-        adapter = new RankingAdapter(arrayList, this);
-        recyclerView.setAdapter(adapter);
     }
 }

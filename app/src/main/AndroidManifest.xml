@@ -49,6 +49,7 @@
         <activity
             android:name=".GameDifficultyPopup"
             android:theme="@android:style/Theme.Dialog" />
+
     </application>
 
 </manifest>

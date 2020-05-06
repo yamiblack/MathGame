@@ -21,12 +21,17 @@ public class QuestionDBOpenHelper extends SQLiteOpenHelper {
     private static final String TABLE_PRACTICE = "practice";
     private static final String TABLE_CHALLENGE = "challenge";
 
+    private static final String TABLE_RANKINGINFORMATION = "rankingInformation";
+
     private static final String KEY_ID = "qid";
     private static final String KEY_QUES = "question";
     private static final String KEY_ANSWER = "answer"; // correct option
     private static final String KEY_OPTA = "opta"; // option a
     private static final String KEY_OPTB = "optb"; // option b
     private static final String KEY_OPTC = "optc"; // option c
+    private static final String KEY_RANKING = "ranking";
+    private static final String KEY_PLAYER = "player";
+    private static final String KEY_CHALLENGESCORE = "challengeScore";
 
     private static final int entireNumberOfQuestions = 21;
     private static final int limitlessNumberOfQuestions = 999;
@@ -78,12 +83,19 @@ public class QuestionDBOpenHelper extends SQLiteOpenHelper {
 
         db.execSQL(sql5);
 
+        String sql7 = "CREATE TABLE IF NOT EXISTS " + TABLE_RANKINGINFORMATION + " ( "
+                + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + KEY_RANKING
+                + " INTEGER, " + KEY_PLAYER + " TEXT, " + KEY_CHALLENGESCORE + " INTEGER " + ")";
+
+        db.execSQL(sql7);
+
 
         addEasyQuestion();
         addMediumQuestion();
         addHardQuestion();
         addPracticeQuestion();
         addChallengeQuestion();
+        addRankingInformation();
 
     }
 
@@ -125,6 +137,11 @@ public class QuestionDBOpenHelper extends SQLiteOpenHelper {
             numberOfLimitlessQuestions[i] = new QuestionRandom(4);
             addChallengeQuestion(numberOfLimitlessQuestions[i]);
         }
+    }
+
+    void addRankingInformation() {
+        RankingInformation rankingInformation = new RankingInformation(0, "E-mail", 0);
+        addRankingInformation(rankingInformation);
     }
 
     @Override
@@ -218,6 +235,26 @@ public class QuestionDBOpenHelper extends SQLiteOpenHelper {
 
         // Inserting Row
         database.insert(TABLE_CHALLENGE, null, values);
+    }
+
+    public void addRankingInformation(RankingInformation rankingInformation) {
+//        database = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(KEY_RANKING, rankingInformation.getRanking());
+        values.put(KEY_PLAYER, rankingInformation.getPlayer());
+        values.put(KEY_CHALLENGESCORE, rankingInformation.getChallengeScore());
+
+        database.insert(TABLE_RANKINGINFORMATION, null, values);
+    }
+
+    public void updateRankingInformation(String player, int challengeScore) {
+        database = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put("player", player);
+        values.put("challengeScore", challengeScore);
+        String player1[] = {player};
+        database.update(TABLE_RANKINGINFORMATION,values,"player=?", player1);
     }
 
 
@@ -339,5 +376,31 @@ public class QuestionDBOpenHelper extends SQLiteOpenHelper {
         }
         // return quest list
         return quesList;
+    }
+
+
+    public List<RankingInformation> getChallengeRanking() {
+        List<RankingInformation> challengeScoreList = new ArrayList<>();
+        String selectQuery = "SELECT  * FROM " + TABLE_RANKINGINFORMATION + " ORDER BY " + KEY_CHALLENGESCORE + " DESC";
+        database = this.getReadableDatabase();
+        Cursor cursor = database.rawQuery(selectQuery, null);
+
+        int ranking = 1;
+
+        if (cursor.moveToFirst()) {
+            do {
+                RankingInformation rankingInformation = new RankingInformation();
+
+                rankingInformation.setId(cursor.getInt(0));
+                rankingInformation.setRanking(ranking);
+                rankingInformation.setPlayer(cursor.getString(2));
+                rankingInformation.setChallengeScore(cursor.getInt(3));
+
+                challengeScoreList.add(rankingInformation);
+                ranking++;
+            } while (cursor.moveToNext());
+        }
+        // return quest list
+        return challengeScoreList;
     }
 }

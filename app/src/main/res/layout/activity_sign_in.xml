@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
             android:ems="10"
-            android:hint="E-mail"
+            android:hint="E-mail (If you are new, please 'Sign-up' below)"
             android:inputType="textEmailAddress" />
 
         <EditText

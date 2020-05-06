@@ -25,6 +25,8 @@ public class SignUpActivity extends Activity {
 
     private FirebaseAuth mAuth;
 
+    private QuestionDBOpenHelper dBOpenHelper = new QuestionDBOpenHelper(this);
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,7 +58,7 @@ public class SignUpActivity extends Activity {
     };
 
     private void signUp() {
-        String email = ((EditText) findViewById(R.id.emailEditText)).getText().toString();
+        final String email = ((EditText) findViewById(R.id.emailEditText)).getText().toString();
         String password = ((EditText) findViewById(R.id.passwordEditText)).getText().toString();
         String passwordCheck = ((EditText) findViewById(R.id.verifyPasswordEditText)).getText().toString();
 
@@ -73,6 +75,8 @@ public class SignUpActivity extends Activity {
                                     FirebaseUser user = mAuth.getCurrentUser();
                                     startToast("Sign-up is successful!");
 
+                                    RankingInformation rankingInformation = new RankingInformation(0, email, 0);
+                                    dBOpenHelper.addRankingInformation(rankingInformation);
 
                                     AlertDialog.Builder ad = new AlertDialog.Builder(SignUpActivity.this);
                                     ad.setTitle("Welcome!");

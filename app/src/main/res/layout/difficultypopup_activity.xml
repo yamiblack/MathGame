@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
-            android:text="Select Difficulty"
+            android:text="Select Difficulty or Mode"
             android:textSize="20sp"
             android:textColor="#fff"
             android:gravity="center"

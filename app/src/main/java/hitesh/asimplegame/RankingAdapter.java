@@ -4,64 +4,71 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.TextView;
-
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class RankingAdapter extends RecyclerView.Adapter<RankingAdapter.RankingViewHolder> {
+public class RankingAdapter extends BaseAdapter {
+
+    ArrayList<RankingInformation> rankingList = new ArrayList<RankingInformation>();
 
 
-    private ArrayList<RankingInformation> arrayList;
-    private Context context;
+    private LayoutInflater inflater=null;
 
+    TextView tvRanking;
+    TextView tvEmail;
+    TextView tvChallengeScore;
 
-    public RankingAdapter(ArrayList<RankingInformation> arrayList, Context context) {
-        this.arrayList = arrayList;
-        this.context = context;
-    }
+    Context context=null;
 
-    @NonNull
-    @Override
-    public RankingViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_ranking, parent, false);
-        RankingViewHolder holder = new RankingViewHolder(view);
-        return holder;
-    }
-
-    @Override
-    public void onBindViewHolder(@NonNull RankingViewHolder holder, int position) {
-        holder.tvDifficulty.setText(arrayList.get(position).getDifficulty());
-        holder.tvRanking.setText(String.valueOf(arrayList.get(position).getRanking()));
-        holder.tvEmail.setText(arrayList.get(position).getEmail());
-        holder.tvScore.setText(String.valueOf(arrayList.get(position).getScore()));
-
+    public RankingAdapter(Context context, ArrayList<RankingInformation> rankingList) {
+        this.context= context;
+        this.rankingList = rankingList;
+        inflater=LayoutInflater.from(this.context);
     }
 
     @Override
-    public int getItemCount() {
-
-
-        return (arrayList != null ? arrayList.size() : 0);
+    public int getCount() {
+        return rankingList.size();
     }
 
-    public class RankingViewHolder extends RecyclerView.ViewHolder {
+    @Override
+    public Object getItem(int position) {
+        return rankingList.get(position);
+    }
 
-        TextView tvDifficulty;
-        TextView tvRanking;
-        TextView tvEmail;
-        TextView tvScore;
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+
+//        if (convertView == null) {
+//            convertView = inflater.inflate(layout, parent, false);
+//        }
+
+        View view= inflater.inflate(R.layout.ranking_list, null);
+
+        tvRanking = (TextView)view.findViewById(R.id.tv_ranking);
+        tvEmail = (TextView)view.findViewById(R.id.tv_email);
+        tvChallengeScore = (TextView)view.findViewById(R.id.tv_challengeScore);
+
+        tvRanking.setText(String.valueOf((rankingList.get(position).getRanking())));
+        tvEmail.setText(rankingList.get(position).getPlayer());
+        tvChallengeScore.setText("Score : " + String.valueOf(rankingList.get(position).getChallengeScore()));
 
 
-        public RankingViewHolder(@NonNull View itemView) {
-            super(itemView);
-            this.tvDifficulty = itemView.findViewById(R.id.tv_difficulty);
-            this.tvRanking = itemView.findViewById(R.id.tv_ranking);
-            this.tvEmail = itemView.findViewById(R.id.tv_email);
-            this.tvScore = itemView.findViewById(R.id.tv_score);
+//        RankingInformation rankingInformation = rankingList.get(position);
+//
+//        tvRanking = (TextView) convertView.findViewById(R.id.tv_ranking);
+//        tvEmail = (TextView) convertView.findViewById(R.id.tv_email);
+//        tvChallengeScore = (TextView) convertView.findViewById((R.id.tv_challengeScore));
+//
 
-        }
+
+        return view;
     }
 }

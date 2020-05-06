@@ -29,7 +29,6 @@ public class ResultActivity extends Activity {
         int score = b.getInt("score");
         textResult.setText("Your score is " + " " + score + ". Play again??");
 
-
         btnYes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

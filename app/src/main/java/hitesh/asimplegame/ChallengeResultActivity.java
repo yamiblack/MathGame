@@ -16,6 +16,9 @@ public class ChallengeResultActivity extends Activity {
     Button btnYes;
     Button btnNo;
 
+    QuestionDBOpenHelper dbOpenHelper = new QuestionDBOpenHelper(this);
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,8 +29,12 @@ public class ChallengeResultActivity extends Activity {
         btnNo = (Button) findViewById(R.id.btn_no1);
 
         Bundle b = getIntent().getExtras();
-        int challengeScore = b.getInt("score");
-        textResult.setText("Your challenge score is " + " " + challengeScore + ". Play again??");
+        int challengeScore = b.getInt("challengeScore");
+        String player=b.getString("player");
+        dbOpenHelper.updateRankingInformation(player,challengeScore);
+        textResult.setText("Your challenge score is " + challengeScore + ". Play again??");
+
+
 
 
         btnYes.setOnClickListener(new View.OnClickListener() {

@@ -19,8 +19,8 @@ import java.util.concurrent.TimeUnit;
 import static hitesh.asimplegame.QuestionDBOpenHelper.setRandomDB;
 
 
-public class QuestionActivity extends Activity {
-    private static final String TAG = QuestionActivity.class.getSimpleName();
+public class PracticeActivity extends Activity {
+    private static final String TAG = PracticeActivity.class.getSimpleName();
 
     private List<Question> questionList;
     private int score = 0;
@@ -42,19 +42,9 @@ public class QuestionActivity extends Activity {
         final String setDifficulty = intent.getExtras().getString("Difficulty");
         final QuestionDBOpenHelper db = new QuestionDBOpenHelper(this);
 
-        if (setDifficulty.equals("Easy")) {
-            difficulty = "Easy";
-            questionList = db.getAllEasyQuestions();
-        }
-
-        if (setDifficulty.equals("Medium")) {
-            difficulty = "Medium";
-            questionList = db.getAllMediumQuestions();
-        }
-
-        if (setDifficulty.equals("Hard")) {
-            difficulty = "Hard";
-            questionList = db.getAllHardQuestions();
+        if (setDifficulty.equals("Practice")) {
+            difficulty = "Practice";
+            questionList = db.getAllPracticeQuestions();
         }
 
         currentQ = questionList.get(questionID);
@@ -103,31 +93,13 @@ public class QuestionActivity extends Activity {
         btnRestart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                if (setDifficulty.equals("Easy")) {
+                if (setDifficulty.equals("Practice")) {
                     setRandomDB();
-                    Intent intent = new Intent(getApplicationContext(), QuestionActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), PracticeActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    intent.putExtra("Difficulty", "Easy");
+                    intent.putExtra("Difficulty", "Practice");
                     startActivity(intent);
                 }
-
-                if (setDifficulty.equals("Medium")) {
-                    setRandomDB();
-                    Intent intent = new Intent(getApplicationContext(), QuestionActivity.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    intent.putExtra("Difficulty", "Medium");
-                    startActivity(intent);
-                }
-
-                if (setDifficulty.equals("Hard")) {
-                    setRandomDB();
-                    Intent intent = new Intent(getApplicationContext(), QuestionActivity.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    intent.putExtra("Difficulty", "Hard");
-                    startActivity(intent);
-                }
-                
             }
         });
 
@@ -145,7 +117,7 @@ public class QuestionActivity extends Activity {
 
         } else {
             // if unlucky start activity and finish the game
-            Intent intent = new Intent(QuestionActivity.this, ResultActivity.class);
+            Intent intent = new Intent(PracticeActivity.this, ResultActivity.class);
 
             // passing the int value
             Bundle b = new Bundle();
@@ -163,7 +135,7 @@ public class QuestionActivity extends Activity {
             setQuestionView();
         } else {
             // if over do this
-            Intent intent = new Intent(QuestionActivity.this, ResultActivity.class);
+            Intent intent = new Intent(PracticeActivity.this, ResultActivity.class);
             Bundle b = new Bundle();
             b.putInt("score", score); // Your score
             intent.putExtras(b); // Put your score to your next
@@ -183,18 +155,7 @@ public class QuestionActivity extends Activity {
 
         @Override
         public void onFinish() {
-
-                times.setText("Time is up");
-
-                Intent intent = new Intent(QuestionActivity.this, ResultActivity.class);
-
-                Bundle b = new Bundle();
-                b.putInt("score", score);
-                intent.putExtras(b);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-                finish();
-
+                times.setText("Practice Mode  Keep Going!");
         }
 
         @Override

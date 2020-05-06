@@ -16,6 +16,8 @@ public class GameDifficultyPopup extends Activity {
     Button btnEasy;
     Button btnMedium;
     Button btnHard;
+    Button btnPractice;
+    Button btnChallenge;
     Button btnClose;
 
     QuestionDBOpenHelper check;
@@ -37,6 +39,8 @@ public class GameDifficultyPopup extends Activity {
         btnEasy = (Button) findViewById(R.id.btn_easy);
         btnMedium = (Button) findViewById(R.id.btn_medium);
         btnHard = (Button) findViewById(R.id.btn_hard);
+        btnPractice = (Button) findViewById(R.id.btn_practice);
+        btnChallenge = (Button) findViewById(R.id.btn_challenge);
         btnClose = (Button) findViewById(R.id.btn_close);
 
         btnEasy.setOnClickListener(new View.OnClickListener() {
@@ -69,9 +73,31 @@ public class GameDifficultyPopup extends Activity {
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.putExtra("Difficulty", "Hard");
                 startActivity(intent);
-
             }
         });
+
+        btnPractice.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setRandomDB();
+                Intent intent = new Intent(getApplicationContext(), PracticeActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.putExtra("Difficulty", "Practice");
+                startActivity(intent);
+            }
+        });
+
+        btnChallenge.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setRandomDB();
+                Intent intent = new Intent(getApplicationContext(), ChallengeActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.putExtra("Difficulty", "Challenge");
+                startActivity(intent);
+            }
+        });
+
 
         btnClose.setOnClickListener(new View.OnClickListener() {
             @Override

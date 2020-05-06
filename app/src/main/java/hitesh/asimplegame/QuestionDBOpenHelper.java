@@ -1,13 +1,13 @@
 package hitesh.asimplegame;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class QuestionDBOpenHelper extends SQLiteOpenHelper {
 
@@ -18,6 +18,8 @@ public class QuestionDBOpenHelper extends SQLiteOpenHelper {
     private static final String TABLE_EASY = "easy";
     private static final String TABLE_MEDIUM = "medium";
     private static final String TABLE_HARD = "hard";
+    private static final String TABLE_PRACTICE = "practice";
+    private static final String TABLE_CHALLENGE = "challenge";
 
     private static final String KEY_ID = "qid";
     private static final String KEY_QUES = "question";
@@ -27,8 +29,10 @@ public class QuestionDBOpenHelper extends SQLiteOpenHelper {
     private static final String KEY_OPTC = "optc"; // option c
 
     private static final int entireNumberOfQuestions = 21;
+    private static final int limitlessNumberOfQuestions = 999;
 
     QuestionRandom[] numberOfQuestions = new QuestionRandom[entireNumberOfQuestions];
+    QuestionRandom[] numberOfLimitlessQuestions = new QuestionRandom[limitlessNumberOfQuestions];
 
     private SQLiteDatabase database;
 
@@ -60,9 +64,26 @@ public class QuestionDBOpenHelper extends SQLiteOpenHelper {
 
         db.execSQL(sql3);
 
+        String sql4 = "CREATE TABLE IF NOT EXISTS " + TABLE_PRACTICE + " ( "
+                + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + KEY_QUES
+                + " TEXT, " + KEY_ANSWER + " TEXT, " + KEY_OPTA + " TEXT, "
+                + KEY_OPTB + " TEXT, " + KEY_OPTC + " TEXT)";
+
+        db.execSQL(sql4);
+
+        String sql5 = "CREATE TABLE IF NOT EXISTS " + TABLE_CHALLENGE + " ( "
+                + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + KEY_QUES
+                + " TEXT, " + KEY_ANSWER + " TEXT, " + KEY_OPTA + " TEXT, "
+                + KEY_OPTB + " TEXT, " + KEY_OPTC + " TEXT)";
+
+        db.execSQL(sql5);
+
+
         addEasyQuestion();
         addMediumQuestion();
         addHardQuestion();
+        addPracticeQuestion();
+        addChallengeQuestion();
 
     }
 
@@ -90,11 +111,29 @@ public class QuestionDBOpenHelper extends SQLiteOpenHelper {
         }
     }
 
+    void addPracticeQuestion() {
+
+        for (int i = 0; i < limitlessNumberOfQuestions; i++) {
+            numberOfLimitlessQuestions[i] = new QuestionRandom(4);
+            addPracticeQuestion(numberOfLimitlessQuestions[i]);
+        }
+    }
+
+    void addChallengeQuestion() {
+
+        for (int i = 0; i < limitlessNumberOfQuestions; i++) {
+            numberOfLimitlessQuestions[i] = new QuestionRandom(4);
+            addChallengeQuestion(numberOfLimitlessQuestions[i]);
+        }
+    }
+
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldV, int newV) {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_EASY);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_MEDIUM);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_HARD);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_PRACTICE);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_CHALLENGE);
         onCreate(db);
     }
 
@@ -103,6 +142,8 @@ public class QuestionDBOpenHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_EASY);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_MEDIUM);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_HARD);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_PRACTICE);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_CHALLENGE);
         onCreate(db);
     }
 
@@ -114,7 +155,6 @@ public class QuestionDBOpenHelper extends SQLiteOpenHelper {
         }
     }
 
-    // Adding new question
     public void addEasyQuestion(Question easy) {
         // SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -128,7 +168,6 @@ public class QuestionDBOpenHelper extends SQLiteOpenHelper {
         database.insert(TABLE_EASY, null, values);
     }
 
-    // Adding new question
     public void addMediumQuestion(Question medium) {
         // SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -153,6 +192,32 @@ public class QuestionDBOpenHelper extends SQLiteOpenHelper {
 
         // Inserting Row
         database.insert(TABLE_HARD, null, values);
+    }
+
+    public void addPracticeQuestion(Question practice) {
+        // SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(KEY_QUES, practice.getQUESTION());
+        values.put(KEY_ANSWER, practice.getANSWER());
+        values.put(KEY_OPTA, practice.getOPTA());
+        values.put(KEY_OPTB, practice.getOPTB());
+        values.put(KEY_OPTC, practice.getOPTC());
+
+        // Inserting Row
+        database.insert(TABLE_PRACTICE, null, values);
+    }
+
+    public void addChallengeQuestion(Question challenge) {
+        // SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(KEY_QUES, challenge.getQUESTION());
+        values.put(KEY_ANSWER, challenge.getANSWER());
+        values.put(KEY_OPTA, challenge.getOPTA());
+        values.put(KEY_OPTB, challenge.getOPTB());
+        values.put(KEY_OPTC, challenge.getOPTC());
+
+        // Inserting Row
+        database.insert(TABLE_CHALLENGE, null, values);
     }
 
 
@@ -208,6 +273,54 @@ public class QuestionDBOpenHelper extends SQLiteOpenHelper {
         List<Question> quesList = new ArrayList<Question>();
         // Select All Query
         String selectQuery = "SELECT  * FROM " + TABLE_HARD;
+        database = this.getReadableDatabase();
+        Cursor cursor = database.rawQuery(selectQuery, null);
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+                Question quest = new Question();
+                quest.setID(cursor.getInt(0));
+                quest.setQUESTION(cursor.getString(1));
+                quest.setANSWER(cursor.getString(2));
+                quest.setOPTA(cursor.getString(3));
+                quest.setOPTB(cursor.getString(4));
+                quest.setOPTC(cursor.getString(5));
+
+                quesList.add(quest);
+            } while (cursor.moveToNext());
+        }
+        // return quest list
+        return quesList;
+    }
+
+    public List<Question> getAllPracticeQuestions() {
+        List<Question> quesList = new ArrayList<Question>();
+        // Select All Query
+        String selectQuery = "SELECT  * FROM " + TABLE_PRACTICE;
+        database = this.getReadableDatabase();
+        Cursor cursor = database.rawQuery(selectQuery, null);
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+                Question quest = new Question();
+                quest.setID(cursor.getInt(0));
+                quest.setQUESTION(cursor.getString(1));
+                quest.setANSWER(cursor.getString(2));
+                quest.setOPTA(cursor.getString(3));
+                quest.setOPTB(cursor.getString(4));
+                quest.setOPTC(cursor.getString(5));
+
+                quesList.add(quest);
+            } while (cursor.moveToNext());
+        }
+        // return quest list
+        return quesList;
+    }
+
+    public List<Question> getAllChallengeQuestions() {
+        List<Question> quesList = new ArrayList<Question>();
+        // Select All Query
+        String selectQuery = "SELECT  * FROM " + TABLE_CHALLENGE;
         database = this.getReadableDatabase();
         Cursor cursor = database.rawQuery(selectQuery, null);
         // looping through all rows and adding to list

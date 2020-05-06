@@ -19,11 +19,11 @@ import java.util.concurrent.TimeUnit;
 import static hitesh.asimplegame.QuestionDBOpenHelper.setRandomDB;
 
 
-public class QuestionActivity extends Activity {
-    private static final String TAG = QuestionActivity.class.getSimpleName();
+public class ChallengeActivity extends Activity {
+    private static final String TAG = ChallengeActivity.class.getSimpleName();
 
     private List<Question> questionList;
-    private int score = 0;
+    private int challengeScore = 0;
     private int questionID = 0;
 
     private Question currentQ;
@@ -42,19 +42,9 @@ public class QuestionActivity extends Activity {
         final String setDifficulty = intent.getExtras().getString("Difficulty");
         final QuestionDBOpenHelper db = new QuestionDBOpenHelper(this);
 
-        if (setDifficulty.equals("Easy")) {
-            difficulty = "Easy";
-            questionList = db.getAllEasyQuestions();
-        }
-
-        if (setDifficulty.equals("Medium")) {
-            difficulty = "Medium";
-            questionList = db.getAllMediumQuestions();
-        }
-
-        if (setDifficulty.equals("Hard")) {
-            difficulty = "Hard";
-            questionList = db.getAllHardQuestions();
+        if (setDifficulty.equals("Challenge")) {
+            difficulty = "Challenge";
+            questionList = db.getAllChallengeQuestions();
         }
 
         currentQ = questionList.get(questionID);
@@ -103,31 +93,13 @@ public class QuestionActivity extends Activity {
         btnRestart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                if (setDifficulty.equals("Easy")) {
+                if (setDifficulty.equals("Challenge")) {
                     setRandomDB();
-                    Intent intent = new Intent(getApplicationContext(), QuestionActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), ChallengeActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    intent.putExtra("Difficulty", "Easy");
+                    intent.putExtra("Difficulty", "Challenge");
                     startActivity(intent);
                 }
-
-                if (setDifficulty.equals("Medium")) {
-                    setRandomDB();
-                    Intent intent = new Intent(getApplicationContext(), QuestionActivity.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    intent.putExtra("Difficulty", "Medium");
-                    startActivity(intent);
-                }
-
-                if (setDifficulty.equals("Hard")) {
-                    setRandomDB();
-                    Intent intent = new Intent(getApplicationContext(), QuestionActivity.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    intent.putExtra("Difficulty", "Hard");
-                    startActivity(intent);
-                }
-                
             }
         });
 
@@ -140,16 +112,16 @@ public class QuestionActivity extends Activity {
 
             // if conditions matches increase the int (score) by 1
             // and set the text of the score view
-            score++;
-            scored.setText("Score : " + score);
+            challengeScore++;
+            scored.setText("Score : " + challengeScore);
 
         } else {
             // if unlucky start activity and finish the game
-            Intent intent = new Intent(QuestionActivity.this, ResultActivity.class);
+            Intent intent = new Intent(ChallengeActivity.this, ChallengeResultActivity.class);
 
             // passing the int value
             Bundle b = new Bundle();
-            b.putInt("score", score); // Your score
+            b.putInt("score", challengeScore); // Your score
             intent.putExtras(b); // Put your score to your next
             startActivity(intent);
             finish();
@@ -157,15 +129,15 @@ public class QuestionActivity extends Activity {
         }
 
 
-        if (questionID < 20) {
+        if (questionID < 999) {
             // if questions are not over then do this
             currentQ = questionList.get(questionID);
             setQuestionView();
         } else {
             // if over do this
-            Intent intent = new Intent(QuestionActivity.this, ResultActivity.class);
+            Intent intent = new Intent(ChallengeActivity.this, ChallengeResultActivity.class);
             Bundle b = new Bundle();
-            b.putInt("score", score); // Your score
+            b.putInt("score", challengeScore); // Your score
             intent.putExtras(b); // Put your score to your next
             startActivity(intent);
             finish();
@@ -186,10 +158,10 @@ public class QuestionActivity extends Activity {
 
                 times.setText("Time is up");
 
-                Intent intent = new Intent(QuestionActivity.this, ResultActivity.class);
+                Intent intent = new Intent(ChallengeActivity.this, ChallengeResultActivity.class);
 
                 Bundle b = new Bundle();
-                b.putInt("score", score);
+                b.putInt("score", challengeScore);
                 intent.putExtras(b);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);

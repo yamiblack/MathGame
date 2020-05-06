@@ -47,6 +47,10 @@ public class QuestionRandom extends Question {
             questionNumber2 = randomNumber.nextInt(mediumMaxNumber - hardMinNumber + 1) + hardMinNumber;
         }
 
+        if (difficulty == 4) {
+            questionNumber1 = randomNumber.nextInt(hardMaxNumber - easyMinNumber + 1) + hardMinNumber;
+            questionNumber2 = randomNumber.nextInt(hardMaxNumber - easyMinNumber + 1) + hardMinNumber;
+        }
 
         answerNumber = questionNumber1 + questionNumber2;
 

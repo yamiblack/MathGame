@@ -2,31 +2,21 @@ package hitesh.asimplegame;
 
 public class RankingInformation {
     private int ranking;
-    private String player;
+    private String email;
     private int challengeScore;
 
     private int id;
 
     public RankingInformation() {
-        id=0;
-        ranking = 0;
-        player = " ";
+        email = " ";
         challengeScore = 0;
     }
 
-    public RankingInformation(int ranking, String player, int challengeScore) {
-        this.ranking = ranking;
-        this.player = player;
+    public RankingInformation(String player, int challengeScore) {
+        this.email = player;
         this.challengeScore = challengeScore;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public int getRanking() {
         return ranking;
@@ -36,12 +26,12 @@ public class RankingInformation {
         this.ranking = ranking;
     }
 
-    public String getPlayer() {
-        return player;
+    public String getEmail() {
+        return email;
     }
 
-    public void setPlayer(String player) {
-        this.player = player;
+    public void setEmail(String player) {
+        this.email = player;
     }
 
     public int getChallengeScore() {

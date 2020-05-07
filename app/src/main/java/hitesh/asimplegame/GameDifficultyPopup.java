@@ -19,12 +19,11 @@ public class GameDifficultyPopup extends Activity {
     Button btnPractice;
     Button btnChallenge;
     Button btnClose;
+    String email;
 
-    QuestionDBOpenHelper check;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
 
         requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -42,6 +41,7 @@ public class GameDifficultyPopup extends Activity {
         btnPractice = (Button) findViewById(R.id.btn_practice);
         btnChallenge = (Button) findViewById(R.id.btn_challenge);
         btnClose = (Button) findViewById(R.id.btn_close);
+
 
         btnEasy.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,6 +92,10 @@ public class GameDifficultyPopup extends Activity {
             public void onClick(View view) {
                 setRandomDB();
                 Intent intent = new Intent(getApplicationContext(), ChallengeActivity.class);
+//                Bundle b = new Bundle();
+//                b.putString("email", email);
+//                b.putInt("challengeScore", 0);
+//                intent.putExtras(b);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.putExtra("Difficulty", "Challenge");
                 startActivity(intent);

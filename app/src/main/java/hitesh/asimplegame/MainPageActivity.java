@@ -16,6 +16,7 @@ public class MainPageActivity extends Activity {
     Button btnSettings;
     Button btnRanking;
     Button btnSignOut;
+    String email;
 
     public boolean onCreateOptionsMenu(Menu menu){
         getMenuInflater().inflate(R.menu.main, menu);
@@ -26,6 +27,7 @@ public class MainPageActivity extends Activity {
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.mainpage);
+
 
             if(FirebaseAuth.getInstance().getCurrentUser() == null) {
                 startSignInActivity();
@@ -38,6 +40,10 @@ public class MainPageActivity extends Activity {
             btnRanking = (Button) findViewById(R.id.btn_ranking);
             btnSignOut = (Button) findViewById(R.id.btn_signout);
 
+
+//            Intent intent = getIntent();
+//            Bundle b = intent.getExtras();
+//            email = b.getString("email");
 
 
             btnSignOut.setOnClickListener(new View.OnClickListener() {

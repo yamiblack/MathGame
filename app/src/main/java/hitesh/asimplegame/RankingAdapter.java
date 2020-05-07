@@ -11,31 +11,33 @@ import java.util.ArrayList;
 
 public class RankingAdapter extends BaseAdapter {
 
-    ArrayList<RankingInformation> rankingList = new ArrayList<RankingInformation>();
+    ArrayList<RankingInformation> rankingInformationList = new ArrayList<RankingInformation>();
 
+//    List<RankingInformation> rankingInformationList;
 
-    private LayoutInflater inflater=null;
 
     TextView tvRanking;
     TextView tvEmail;
     TextView tvChallengeScore;
 
-    Context context=null;
+    public RankingAdapter() {
 
-    public RankingAdapter(Context context, ArrayList<RankingInformation> rankingList) {
-        this.context= context;
-        this.rankingList = rankingList;
-        inflater=LayoutInflater.from(this.context);
     }
+
+//    public RankingAdapter(Context context, ArrayList<RankingInformation> rankingList) {
+//        this.context= context;
+//        this.rankingInformationList = rankingList;
+//        inflater=LayoutInflater.from(this.context);
+//    }
 
     @Override
     public int getCount() {
-        return rankingList.size();
+        return rankingInformationList.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return rankingList.get(position);
+        return rankingInformationList.get(position);
     }
 
     @Override
@@ -45,30 +47,33 @@ public class RankingAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+        final int pos = position;
+        final Context context = parent.getContext();
 
-//        if (convertView == null) {
-//            convertView = inflater.inflate(layout, parent, false);
-//        }
+        if (convertView == null) {
+            LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            convertView = inflater.inflate(R.layout.ranking_list, parent, false);
+        }
 
-        View view= inflater.inflate(R.layout.ranking_list, null);
+        tvRanking = (TextView)convertView.findViewById(R.id.tv_ranking);
+        tvEmail = (TextView)convertView.findViewById(R.id.tv_email);
+        tvChallengeScore = (TextView)convertView.findViewById(R.id.tv_challengeScore);
 
-        tvRanking = (TextView)view.findViewById(R.id.tv_ranking);
-        tvEmail = (TextView)view.findViewById(R.id.tv_email);
-        tvChallengeScore = (TextView)view.findViewById(R.id.tv_challengeScore);
+        RankingInformation rankingItem = rankingInformationList.get(position);
 
-        tvRanking.setText(String.valueOf((rankingList.get(position).getRanking())));
-        tvEmail.setText(rankingList.get(position).getPlayer());
-        tvChallengeScore.setText("Score : " + String.valueOf(rankingList.get(position).getChallengeScore()));
-
-
-//        RankingInformation rankingInformation = rankingList.get(position);
-//
-//        tvRanking = (TextView) convertView.findViewById(R.id.tv_ranking);
-//        tvEmail = (TextView) convertView.findViewById(R.id.tv_email);
-//        tvChallengeScore = (TextView) convertView.findViewById((R.id.tv_challengeScore));
-//
+        tvRanking.setText(String.valueOf(rankingItem.getRanking()));
+        tvEmail.setText(rankingItem.getEmail());
+        tvChallengeScore.setText("Score : " + String.valueOf(rankingItem.getChallengeScore()));
 
 
-        return view;
+        return convertView;
+    }
+
+    public void addRanking(int ranking, String email, int score) {
+        RankingInformation newRanking = new RankingInformation();
+        newRanking.setEmail(email);
+        newRanking.setChallengeScore(score);
+        newRanking.setRanking(ranking);
+        rankingInformationList.add(newRanking);
     }
 }

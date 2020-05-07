@@ -23,11 +23,16 @@ public class ChallengeActivity extends Activity {
     private static final String TAG = ChallengeActivity.class.getSimpleName();
 
     private List<Question> questionList;
+
+    private List<RankingInformation> rankingInformationList;
+
     private int challengeScore = 0;
     private int questionID = 0;
 
     private int life = 2;
     private int showLife = life + 1;
+
+    private String email;
 
     private Question currentQ;
     private TextView txtQuestion, times, scored, txtLife;
@@ -41,9 +46,12 @@ public class ChallengeActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         Intent intent = getIntent();
         final String setDifficulty = intent.getExtras().getString("Difficulty");
-        final QuestionDBOpenHelper db = new QuestionDBOpenHelper(this);
+        QuestionDBOpenHelper db = new QuestionDBOpenHelper(this);
+//        Bundle b = getIntent().getExtras();
+//        email = b.getString("email");
 
         if (setDifficulty.equals("Challenge")) {
             difficulty = "Challenge";
@@ -100,6 +108,9 @@ public class ChallengeActivity extends Activity {
                     setRandomDB();
                     Intent intent = new Intent(getApplicationContext(), ChallengeActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//                    Bundle b = new Bundle();
+//                    b.putString("email", email);
+//                    intent.putExtras(b);
                     intent.putExtra("Difficulty", "Challenge");
                     startActivity(intent);
                 }
@@ -125,7 +136,9 @@ public class ChallengeActivity extends Activity {
 
                 // passing the int value
                 Bundle b = new Bundle();
+//                b.putInt("id",1);
                 b.putInt("score", challengeScore); // Your score
+//                b.putString("email", email);
                 intent.putExtras(b); // Put your score to your next
                 startActivity(intent);
                 finish();
@@ -147,6 +160,7 @@ public class ChallengeActivity extends Activity {
             Intent intent = new Intent(ChallengeActivity.this, ChallengeResultActivity.class);
             Bundle b = new Bundle();
             b.putInt("score", challengeScore); // Your score
+//            b.putString("email", email);
             intent.putExtras(b); // Put your score to your next
             startActivity(intent);
             finish();
@@ -167,9 +181,13 @@ public class ChallengeActivity extends Activity {
 
             times.setText("Time is up");
 
+
+
             Intent intent = new Intent(ChallengeActivity.this, ChallengeResultActivity.class);
 
             Bundle b = new Bundle();
+//            b.putInt("id",1);
+//            b.putString("email", email);
             b.putInt("score", challengeScore);
             intent.putExtras(b);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

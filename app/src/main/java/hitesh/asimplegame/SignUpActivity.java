@@ -75,8 +75,8 @@ public class SignUpActivity extends Activity {
                                     FirebaseUser user = mAuth.getCurrentUser();
                                     startToast("Sign-up is successful!");
 
-                                    RankingInformation rankingInformation = new RankingInformation(0, email, 0);
-                                    dBOpenHelper.addRankingInformation(rankingInformation);
+//                                    RankingInformation rankingInformation = new RankingInformation(0, email, 0);
+//                                    dBOpenHelper.addRankingInformation(rankingInformation);
 
                                     AlertDialog.Builder ad = new AlertDialog.Builder(SignUpActivity.this);
                                     ad.setTitle("Welcome!");

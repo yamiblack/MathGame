@@ -30,8 +30,8 @@ public class QuestionDBOpenHelper extends SQLiteOpenHelper {
     private static final String KEY_OPTB = "optb"; // option b
     private static final String KEY_OPTC = "optc"; // option c
     private static final String KEY_RANKING = "ranking";
-    private static final String KEY_PLAYER = "player";
-    private static final String KEY_CHALLENGESCORE = "challengeScore";
+    private static final String KEY_EMAIL = "email";
+    private static final String KEY_CHALLENGESCORE = "score";
 
     private static final int entireNumberOfQuestions = 21;
     private static final int limitlessNumberOfQuestions = 999;
@@ -84,8 +84,7 @@ public class QuestionDBOpenHelper extends SQLiteOpenHelper {
         db.execSQL(sql5);
 
         String sql7 = "CREATE TABLE IF NOT EXISTS " + TABLE_RANKINGINFORMATION + " ( "
-                + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + KEY_RANKING
-                + " INTEGER, " + KEY_PLAYER + " TEXT, " + KEY_CHALLENGESCORE + " INTEGER " + ")";
+                + KEY_ID + " TEXT, " + KEY_CHALLENGESCORE + " INTEGER " + ")";
 
         db.execSQL(sql7);
 
@@ -140,8 +139,8 @@ public class QuestionDBOpenHelper extends SQLiteOpenHelper {
     }
 
     void addRankingInformation() {
-        RankingInformation rankingInformation = new RankingInformation(0, "E-mail", 0);
-        addRankingInformation(rankingInformation);
+//        RankingInformation rankingInformation = new RankingInformation(0, "email", 0);
+//        addRankingInformation(rankingInformation);
     }
 
     @Override
@@ -240,21 +239,22 @@ public class QuestionDBOpenHelper extends SQLiteOpenHelper {
     public void addRankingInformation(RankingInformation rankingInformation) {
 //        database = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(KEY_RANKING, rankingInformation.getRanking());
-        values.put(KEY_PLAYER, rankingInformation.getPlayer());
+//        values.put(KEY_RANKING, rankingInformation.getRanking());
+        values.put(KEY_ID, rankingInformation.getEmail());
         values.put(KEY_CHALLENGESCORE, rankingInformation.getChallengeScore());
 
         database.insert(TABLE_RANKINGINFORMATION, null, values);
     }
 
-    public void updateRankingInformation(String player, int challengeScore) {
+    public void updateRankingInformation(String email, int challengeScore) {
         database = this.getWritableDatabase();
         ContentValues values = new ContentValues();
 
-        values.put("player", player);
-        values.put("challengeScore", challengeScore);
-        String player1[] = {player};
-        database.update(TABLE_RANKINGINFORMATION,values,"player=?", player1);
+        values.put("email", email);
+        values.put("score", challengeScore);
+
+        String email1[] = {email};
+        database.update(TABLE_RANKINGINFORMATION,values,"player=?", email1);
     }
 
 
@@ -385,22 +385,34 @@ public class QuestionDBOpenHelper extends SQLiteOpenHelper {
         database = this.getReadableDatabase();
         Cursor cursor = database.rawQuery(selectQuery, null);
 
-        int ranking = 1;
+//        int ranking = 1;
 
         if (cursor.moveToFirst()) {
             do {
                 RankingInformation rankingInformation = new RankingInformation();
 
-                rankingInformation.setId(cursor.getInt(0));
-                rankingInformation.setRanking(ranking);
-                rankingInformation.setPlayer(cursor.getString(2));
-                rankingInformation.setChallengeScore(cursor.getInt(3));
+//                rankingInformation.setId(cursor.getInt(0));
+//                rankingInformation.setRanking(ranking);
+                rankingInformation.setEmail(cursor.getString(0));
+                rankingInformation.setChallengeScore(cursor.getInt(1));
 
                 challengeScoreList.add(rankingInformation);
-                ranking++;
+//                ranking++;
             } while (cursor.moveToNext());
         }
         // return quest list
         return challengeScoreList;
+    }
+
+
+    public String getKeyId(){
+        return KEY_ID;
+    }
+    public String getKeyChallengescore() {
+        return KEY_CHALLENGESCORE;
+    }
+
+    public String getTableRankinginformation() {
+        return TABLE_RANKINGINFORMATION;
     }
 }

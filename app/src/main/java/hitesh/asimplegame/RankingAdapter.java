@@ -13,22 +13,12 @@ public class RankingAdapter extends BaseAdapter {
 
     ArrayList<RankingInformation> rankingInformationList = new ArrayList<RankingInformation>();
 
-//    List<RankingInformation> rankingInformationList;
-
-
     TextView tvRanking;
-//    TextView tvEmail;
     TextView tvChallengeScore;
 
     public RankingAdapter() {
 
     }
-
-//    public RankingAdapter(Context context, ArrayList<RankingInformation> rankingList) {
-//        this.context= context;
-//        this.rankingInformationList = rankingList;
-//        inflater=LayoutInflater.from(this.context);
-//    }
 
     @Override
     public int getCount() {

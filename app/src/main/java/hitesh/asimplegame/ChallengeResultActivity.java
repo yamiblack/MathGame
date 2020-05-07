@@ -20,9 +20,6 @@ public class ChallengeResultActivity extends Activity {
 
     QuestionDBOpenHelper dbOpenHelper = new QuestionDBOpenHelper(this);
     SQLiteDatabase sqLiteDatabase;
-//    SharedPreferences sharedPreferences;
-
-    private String email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -200,6 +200,7 @@ public class QuestionActivity extends Activity {
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
             finish();
+            timer.cancel();
 
         }
 
@@ -230,5 +231,12 @@ public class QuestionActivity extends Activity {
         questionID++;
     }
 
+    @Override
+    public void onBackPressed() {
+        timer.cancel();
+        Intent intent = new Intent(this, MainPageActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+    }
 
 }

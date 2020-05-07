@@ -168,8 +168,6 @@ public class ChallengeActivity extends Activity {
 
             times.setText("Time is up");
 
-
-
             Intent intent = new Intent(ChallengeActivity.this, ChallengeResultActivity.class);
 
             Bundle b = new Bundle();
@@ -178,6 +176,7 @@ public class ChallengeActivity extends Activity {
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
             finish();
+            timer.cancel();
 
         }
 
@@ -209,5 +208,11 @@ public class ChallengeActivity extends Activity {
         questionID++;
     }
 
-
+    @Override
+    public void onBackPressed() {
+        timer.cancel();
+        Intent intent = new Intent(this, MainPageActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+    }
 }

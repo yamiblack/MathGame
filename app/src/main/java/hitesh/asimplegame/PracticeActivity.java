@@ -164,7 +164,7 @@ public class PracticeActivity extends Activity {
 
         @Override
         public void onFinish() {
-                times.setText("Practice Mode  Keep Going!");
+                times.setText("Practice Mode Keep Going!");
         }
 
         @Override
@@ -195,5 +195,12 @@ public class PracticeActivity extends Activity {
         questionID++;
     }
 
+    @Override
+    public void onBackPressed() {
+        timer.cancel();
+        Intent intent = new Intent(this, MainPageActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+    }
 
 }

@@ -16,7 +16,6 @@ public class MainPageActivity extends Activity {
     Button btnSettings;
     Button btnRanking;
     Button btnSignOut;
-    String email;
 
     public boolean onCreateOptionsMenu(Menu menu){
         getMenuInflater().inflate(R.menu.main, menu);

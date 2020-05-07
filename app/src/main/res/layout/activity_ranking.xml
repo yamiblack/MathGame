@@ -25,9 +25,8 @@
 
     <Button
         android:id="@+id/btn_backToMainpage"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="125dp"
         android:text="Back to Main Page" />
 
 

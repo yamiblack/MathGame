@@ -3,7 +3,6 @@ package hitesh.asimplegame;
 import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
@@ -21,7 +20,7 @@ public class ChallengeResultActivity extends Activity {
 
     QuestionDBOpenHelper dbOpenHelper = new QuestionDBOpenHelper(this);
     SQLiteDatabase sqLiteDatabase;
-    SharedPreferences sharedPreferences;
+//    SharedPreferences sharedPreferences;
 
     private String email;
 
@@ -31,7 +30,7 @@ public class ChallengeResultActivity extends Activity {
         setContentView(R.layout.activity_result);
 
         sqLiteDatabase = dbOpenHelper.getWritableDatabase();
-        sharedPreferences = getSharedPreferences("email", MODE_PRIVATE);
+//        sharedPreferences = getSharedPreferences("email", MODE_PRIVATE);
 
         textResult = (TextView) findViewById(R.id.textResult);
         btnYes = (Button) findViewById(R.id.btn_yes1);
@@ -44,7 +43,7 @@ public class ChallengeResultActivity extends Activity {
         textResult.setText("Your challenge score is " + challengeScore + ". Play again??");
 
         ContentValues values = new ContentValues();
-        values.put(dbOpenHelper.getKeyId(), email);
+//        values.put(dbOpenHelper.getKeyId(), email);
         values.put(dbOpenHelper.getKeyChallengescore(), challengeScore);
         sqLiteDatabase.insert(dbOpenHelper.getTableRankinginformation(),null,values);
 

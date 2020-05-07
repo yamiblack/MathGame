@@ -49,6 +49,15 @@
         <activity
             android:name=".GameDifficultyPopup"
             android:theme="@android:style/Theme.Dialog" />
+        <activity
+            android:name=".Setting"
+            android:theme="@android:style/Theme.Dialog" />
+        <activity
+            android:name=".MyPage"
+            android:screenOrientation="portrait"/>
+        <service android:name=".MusicService">
+
+        </service>
 
     </application>
 

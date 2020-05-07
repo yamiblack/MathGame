@@ -43,7 +43,7 @@ public class RankingActivity extends Activity {
 
         for (int i = 0; i < maxRanking; i++) {
             RankingInformation rankingInformation = rankingInformationsList.get(i);
-            rankingAdapter.addRanking(i + 1, rankingInformation.getEmail(), rankingInformation.getChallengeScore());
+            rankingAdapter.addRanking(i + 1, rankingInformation.getChallengeScore());
         }
 
 

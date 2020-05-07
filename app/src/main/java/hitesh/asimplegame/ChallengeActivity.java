@@ -32,13 +32,13 @@ public class ChallengeActivity extends Activity {
     private int life = 2;
     private int showLife = life + 1;
 
-    private String email;
-
     private Question currentQ;
     private TextView txtQuestion, times, scored, txtLife;
     private Button button1, button2, button3, btnRestart;
 
     public static String difficulty;
+
+    final CounterClass timer = new CounterClass(60000, 1000);
 
 
     @Override
@@ -73,7 +73,7 @@ public class ChallengeActivity extends Activity {
 
         setQuestionView();
 
-        final CounterClass timer = new CounterClass(60000, 1000);
+//        final CounterClass timer = new CounterClass(60000, 1000);
         timer.start();
 
 
@@ -105,6 +105,7 @@ public class ChallengeActivity extends Activity {
             @Override
             public void onClick(View v) {
                 if (setDifficulty.equals("Challenge")) {
+                    timer.cancel();
                     setRandomDB();
                     Intent intent = new Intent(getApplicationContext(), ChallengeActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -142,6 +143,7 @@ public class ChallengeActivity extends Activity {
                 intent.putExtras(b); // Put your score to your next
                 startActivity(intent);
                 finish();
+                timer.cancel();
             } else {
                 life--;
                 showLife--;

@@ -1,7 +1,6 @@
 package hitesh.asimplegame;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -34,9 +33,6 @@ public class SignInActivity extends Activity {
         setContentView(R.layout.activity_sign_in);
 
         mAuth = FirebaseAuth.getInstance();
-
-        sharedPreferences = getSharedPreferences("email", Context.MODE_PRIVATE);
-        editor = sharedPreferences.edit();
 
         findViewById(R.id.btn_ok).setOnClickListener(onClickListener);
         findViewById(R.id.btn_toSignUp).setOnClickListener(onClickListener);
@@ -96,8 +92,8 @@ public class SignInActivity extends Activity {
 //                            b.putString("email", email);
 //                            intent.putExtras(b);
 
-                            editor.putString("email", email);
-                            editor.commit();
+//                            editor.putString("email", email);
+//                            editor.commit();
 
                             startToast("Sign-ip is successful!");
                             finishSignInActivity();

@@ -34,6 +34,8 @@ public class PracticeActivity extends Activity {
 
     public static String difficulty;
 
+    final CounterClass timer = new CounterClass(60000, 1000);
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,7 +68,7 @@ public class PracticeActivity extends Activity {
 
         setQuestionView();
 
-        final CounterClass timer = new CounterClass(60000, 1000);
+//        final CounterClass timer = new CounterClass(60000, 1000);
         timer.start();
 
 
@@ -98,6 +100,7 @@ public class PracticeActivity extends Activity {
             @Override
             public void onClick(View v) {
                 if (setDifficulty.equals("Practice")) {
+                    timer.cancel();
                     setRandomDB();
                     Intent intent = new Intent(getApplicationContext(), PracticeActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -129,6 +132,7 @@ public class PracticeActivity extends Activity {
                 intent.putExtras(b); // Put your score to your next
                 startActivity(intent);
                 finish();
+                timer.cancel();
             } else {
                 life--;
                 showLife--;

@@ -34,6 +34,8 @@ public class QuestionActivity extends Activity {
 
     public static String difficulty;
 
+    final CounterClass timer = new CounterClass(60000, 1000);
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,7 +76,7 @@ public class QuestionActivity extends Activity {
 
         setQuestionView();
 
-        final CounterClass timer = new CounterClass(60000, 1000);
+//        final CounterClass timer = new CounterClass(60000, 1000);
         timer.start();
 
 
@@ -107,6 +109,7 @@ public class QuestionActivity extends Activity {
             public void onClick(View v) {
 
                 if (setDifficulty.equals("Easy")) {
+                    timer.cancel();
                     setRandomDB();
                     Intent intent = new Intent(getApplicationContext(), QuestionActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -115,6 +118,7 @@ public class QuestionActivity extends Activity {
                 }
 
                 if (setDifficulty.equals("Medium")) {
+                    timer.cancel();
                     setRandomDB();
                     Intent intent = new Intent(getApplicationContext(), QuestionActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -123,6 +127,7 @@ public class QuestionActivity extends Activity {
                 }
 
                 if (setDifficulty.equals("Hard")) {
+                    timer.cancel();
                     setRandomDB();
                     Intent intent = new Intent(getApplicationContext(), QuestionActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -155,6 +160,7 @@ public class QuestionActivity extends Activity {
                 intent.putExtras(b); // Put your score to your next
                 startActivity(intent);
                 finish();
+                timer.cancel();
             } else {
                 life--;
                 showLife--;

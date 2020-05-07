@@ -29,8 +29,6 @@ public class QuestionDBOpenHelper extends SQLiteOpenHelper {
     private static final String KEY_OPTA = "opta"; // option a
     private static final String KEY_OPTB = "optb"; // option b
     private static final String KEY_OPTC = "optc"; // option c
-    private static final String KEY_RANKING = "ranking";
-    private static final String KEY_EMAIL = "email";
     private static final String KEY_CHALLENGESCORE = "score";
 
     private static final int entireNumberOfQuestions = 21;
@@ -83,10 +81,10 @@ public class QuestionDBOpenHelper extends SQLiteOpenHelper {
 
         db.execSQL(sql5);
 
-        String sql7 = "CREATE TABLE IF NOT EXISTS " + TABLE_RANKINGINFORMATION + " ( "
-                + KEY_ID + " TEXT, " + KEY_CHALLENGESCORE + " INTEGER " + ")";
+        String sql6 = "CREATE TABLE IF NOT EXISTS " + TABLE_RANKINGINFORMATION + " ( "
+                + KEY_CHALLENGESCORE + " INTEGER " + ")";
 
-        db.execSQL(sql7);
+        db.execSQL(sql6);
 
 
         addEasyQuestion();
@@ -240,22 +238,22 @@ public class QuestionDBOpenHelper extends SQLiteOpenHelper {
 //        database = this.getWritableDatabase();
         ContentValues values = new ContentValues();
 //        values.put(KEY_RANKING, rankingInformation.getRanking());
-        values.put(KEY_ID, rankingInformation.getEmail());
+//        values.put(KEY_ID, rankingInformation.getEmail());
         values.put(KEY_CHALLENGESCORE, rankingInformation.getChallengeScore());
 
         database.insert(TABLE_RANKINGINFORMATION, null, values);
     }
 
-    public void updateRankingInformation(String email, int challengeScore) {
-        database = this.getWritableDatabase();
-        ContentValues values = new ContentValues();
-
-        values.put("email", email);
-        values.put("score", challengeScore);
-
-        String email1[] = {email};
-        database.update(TABLE_RANKINGINFORMATION,values,"player=?", email1);
-    }
+//    public void updateRankingInformation(String email, int challengeScore) {
+//        database = this.getWritableDatabase();
+//        ContentValues values = new ContentValues();
+//
+//        values.put("email", email);
+//        values.put("score", challengeScore);
+//
+//        String email1[] = {email};
+//        database.update(TABLE_RANKINGINFORMATION,values,"player=?", email1);
+//    }
 
 
     public List<Question> getAllEasyQuestions() {
@@ -393,8 +391,8 @@ public class QuestionDBOpenHelper extends SQLiteOpenHelper {
 
 //                rankingInformation.setId(cursor.getInt(0));
 //                rankingInformation.setRanking(ranking);
-                rankingInformation.setEmail(cursor.getString(0));
-                rankingInformation.setChallengeScore(cursor.getInt(1));
+//                rankingInformation.setEmail(cursor.getString(0));
+                rankingInformation.setChallengeScore(cursor.getInt(0));
 
                 challengeScoreList.add(rankingInformation);
 //                ranking++;
@@ -404,10 +402,6 @@ public class QuestionDBOpenHelper extends SQLiteOpenHelper {
         return challengeScoreList;
     }
 
-
-    public String getKeyId(){
-        return KEY_ID;
-    }
     public String getKeyChallengescore() {
         return KEY_CHALLENGESCORE;
     }

@@ -17,17 +17,19 @@
         android:textSize="24sp"
         android:textStyle="bold" />
 
+    <Button
+        android:id="@+id/btn_backToMainpage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Back to Main Page" />
+
 
     <ListView
         android:id="@+id/lv_ranking"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
-    <Button
-        android:id="@+id/btn_backToMainpage"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Back to Main Page" />
+
 
 
 

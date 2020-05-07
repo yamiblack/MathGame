@@ -50,8 +50,6 @@ public class ChallengeActivity extends Activity {
         Intent intent = getIntent();
         final String setDifficulty = intent.getExtras().getString("Difficulty");
         QuestionDBOpenHelper db = new QuestionDBOpenHelper(this);
-//        Bundle b = getIntent().getExtras();
-//        email = b.getString("email");
 
         if (setDifficulty.equals("Challenge")) {
             difficulty = "Challenge";
@@ -73,7 +71,6 @@ public class ChallengeActivity extends Activity {
 
         setQuestionView();
 
-//        final CounterClass timer = new CounterClass(60000, 1000);
         timer.start();
 
 
@@ -109,9 +106,6 @@ public class ChallengeActivity extends Activity {
                     setRandomDB();
                     Intent intent = new Intent(getApplicationContext(), ChallengeActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//                    Bundle b = new Bundle();
-//                    b.putString("email", email);
-//                    intent.putExtras(b);
                     intent.putExtra("Difficulty", "Challenge");
                     startActivity(intent);
                 }
@@ -124,9 +118,6 @@ public class ChallengeActivity extends Activity {
     public void getAnswer(String AnswerString) {
 
         if (currentQ.getANSWER().equals(AnswerString)) {
-
-            // if conditions matches increase the int (score) by 1
-            // and set the text of the score view
             challengeScore++;
             scored.setText("Score : " + challengeScore);
 
@@ -135,11 +126,8 @@ public class ChallengeActivity extends Activity {
             if (life == 0) {
                 Intent intent = new Intent(ChallengeActivity.this, ChallengeResultActivity.class);
 
-                // passing the int value
                 Bundle b = new Bundle();
-//                b.putInt("id",1);
                 b.putInt("score", challengeScore); // Your score
-//                b.putString("email", email);
                 intent.putExtras(b); // Put your score to your next
                 startActivity(intent);
                 finish();
@@ -153,16 +141,13 @@ public class ChallengeActivity extends Activity {
 
 
         if (questionID < 999) {
-            // if questions are not over then do this
             currentQ = questionList.get(questionID);
             setQuestionView();
         } else {
 
-            // if over do this
             Intent intent = new Intent(ChallengeActivity.this, ChallengeResultActivity.class);
             Bundle b = new Bundle();
             b.putInt("score", challengeScore); // Your score
-//            b.putString("email", email);
             intent.putExtras(b); // Put your score to your next
             startActivity(intent);
             finish();
@@ -188,8 +173,6 @@ public class ChallengeActivity extends Activity {
             Intent intent = new Intent(ChallengeActivity.this, ChallengeResultActivity.class);
 
             Bundle b = new Bundle();
-//            b.putInt("id",1);
-//            b.putString("email", email);
             b.putInt("score", challengeScore);
             intent.putExtras(b);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

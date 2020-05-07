@@ -16,7 +16,6 @@ public class RankingActivity extends Activity {
     private List<RankingInformation> rankingInformationsList;
     QuestionDBOpenHelper dbOpenHelper = new QuestionDBOpenHelper(this);
     RankingAdapter rankingAdapter;
-    private int maxRanking;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,23 +28,12 @@ public class RankingActivity extends Activity {
 
         btnBackToMainpage = (Button) findViewById(R.id.btn_backToMainpage);
 
-//        rankingInformationsList = dbOpenHelper.getChallengeRanking();
-//        rankingAdapter =new RankingAdapter(this, (ArrayList<RankingInformation>) rankingInformationsList);
-//        lvRanking.setAdapter(rankingAdapter);
-
         rankingInformationsList = dbOpenHelper.getChallengeRanking();
 
-        maxRanking = rankingInformationsList.size();
-
-        if (maxRanking > 5) {
-            maxRanking = 5;
-        }
-
-        for (int i = 0; i < maxRanking; i++) {
+        for (int i = 0; i < rankingInformationsList.size(); i++) {
             RankingInformation rankingInformation = rankingInformationsList.get(i);
             rankingAdapter.addRanking(i + 1, rankingInformation.getChallengeScore());
         }
-
 
         btnBackToMainpage.setOnClickListener(new View.OnClickListener() {
 

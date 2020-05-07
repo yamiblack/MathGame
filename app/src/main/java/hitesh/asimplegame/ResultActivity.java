@@ -67,13 +67,6 @@ public class ResultActivity extends Activity {
         });
     }
 
-//	public void playagain(View o) {
-//			setRandomDB();
-//			Intent intent = new Intent(this, QuestionActivity.class);
-//			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//			startActivity(intent);
-//	}
-
     private void startMainActivity() {
         setRandomDB();
         Intent intent = new Intent(this, MainPageActivity.class);

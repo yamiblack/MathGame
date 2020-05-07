@@ -40,12 +40,6 @@ public class MainPageActivity extends Activity {
             btnRanking = (Button) findViewById(R.id.btn_ranking);
             btnSignOut = (Button) findViewById(R.id.btn_signout);
 
-
-//            Intent intent = getIntent();
-//            Bundle b = intent.getExtras();
-//            email = b.getString("email");
-
-
             btnSignOut.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -73,17 +67,9 @@ public class MainPageActivity extends Activity {
         btnMypage.setOnClickListener(new View.OnClickListener() {
                 @Override
         public void onClick(View view) {
-                    startActivity(new Intent(getApplicationContext(), MyPage.class));
+                    startActivity(new Intent(getApplicationContext(), MyPageActivity.class));
         }
         });
-
-
-//        btnSettings.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                startActivity(new Intent(getApplicationContext(), Setting.class));
-//            }
-//        });
 
     }
 

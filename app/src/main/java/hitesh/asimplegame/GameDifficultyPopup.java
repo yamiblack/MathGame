@@ -92,10 +92,7 @@ public class GameDifficultyPopup extends Activity {
             public void onClick(View view) {
                 setRandomDB();
                 Intent intent = new Intent(getApplicationContext(), ChallengeActivity.class);
-//                Bundle b = new Bundle();
-//                b.putString("email", email);
-//                b.putInt("challengeScore", 0);
-//                intent.putExtras(b);
+
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.putExtra("Difficulty", "Challenge");
                 startActivity(intent);

@@ -56,13 +56,11 @@ public class RankingAdapter extends BaseAdapter {
         }
 
         tvRanking = (TextView)convertView.findViewById(R.id.tv_ranking);
-//        tvEmail = (TextView)convertView.findViewById(R.id.tv_email);
         tvChallengeScore = (TextView)convertView.findViewById(R.id.tv_challengeScore);
 
         RankingInformation rankingItem = rankingInformationList.get(position);
 
         tvRanking.setText("Ranking : " + String.valueOf(rankingItem.getRanking()));
-//        tvEmail.setText(rankingItem.getEmail());
         tvChallengeScore.setText("Score : " + String.valueOf(rankingItem.getChallengeScore()));
 
         return convertView;
@@ -70,7 +68,6 @@ public class RankingAdapter extends BaseAdapter {
 
     public void addRanking(int ranking, int score) {
         RankingInformation newRanking = new RankingInformation();
-//        newRanking.setEmail(email);
         newRanking.setChallengeScore(score);
         newRanking.setRanking(ranking);
         rankingInformationList.add(newRanking);

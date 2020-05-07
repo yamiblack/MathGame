@@ -76,7 +76,6 @@ public class QuestionActivity extends Activity {
 
         setQuestionView();
 
-//        final CounterClass timer = new CounterClass(60000, 1000);
         timer.start();
 
 
@@ -144,9 +143,6 @@ public class QuestionActivity extends Activity {
     public void getAnswer(String AnswerString) {
 
         if (currentQ.getANSWER().equals(AnswerString)) {
-
-            // if conditions matches increase the int (score) by 1
-            // and set the text of the score view
             score++;
             scored.setText("Score : " + score);
 
@@ -170,11 +166,9 @@ public class QuestionActivity extends Activity {
 
 
         if (questionID < 20) {
-            // if questions are not over then do this
             currentQ = questionList.get(questionID);
             setQuestionView();
         } else {
-            // if over do this
             Intent intent = new Intent(QuestionActivity.this, ResultActivity.class);
             Bundle b = new Bundle();
             b.putInt("score", score); // Your score
@@ -228,7 +222,6 @@ public class QuestionActivity extends Activity {
     }
 
     private void setQuestionView() {
-        // the method which will put all things together
         txtQuestion.setText(currentQ.getQUESTION());
         button1.setText(currentQ.getOPTA());
         button2.setText(currentQ.getOPTB());

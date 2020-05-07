@@ -68,7 +68,6 @@ public class PracticeActivity extends Activity {
 
         setQuestionView();
 
-//        final CounterClass timer = new CounterClass(60000, 1000);
         timer.start();
 
 
@@ -142,11 +141,9 @@ public class PracticeActivity extends Activity {
 
 
         if (questionID < 999) {
-            // if questions are not over then do this
             currentQ = questionList.get(questionID);
             setQuestionView();
         } else {
-            // if over do this
             Intent intent = new Intent(PracticeActivity.this, ResultActivity.class);
             Bundle b = new Bundle();
             b.putInt("score", score); // Your score

@@ -137,8 +137,7 @@ public class QuestionDBOpenHelper extends SQLiteOpenHelper {
     }
 
     void addRankingInformation() {
-//        RankingInformation rankingInformation = new RankingInformation(0, "email", 0);
-//        addRankingInformation(rankingInformation);
+
     }
 
     @Override
@@ -170,7 +169,6 @@ public class QuestionDBOpenHelper extends SQLiteOpenHelper {
     }
 
     public void addEasyQuestion(Question easy) {
-        // SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(KEY_QUES, easy.getQUESTION());
         values.put(KEY_ANSWER, easy.getANSWER());
@@ -178,12 +176,10 @@ public class QuestionDBOpenHelper extends SQLiteOpenHelper {
         values.put(KEY_OPTB, easy.getOPTB());
         values.put(KEY_OPTC, easy.getOPTC());
 
-        // Inserting Row
         database.insert(TABLE_EASY, null, values);
     }
 
     public void addMediumQuestion(Question medium) {
-        // SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(KEY_QUES, medium.getQUESTION());
         values.put(KEY_ANSWER, medium.getANSWER());
@@ -191,12 +187,10 @@ public class QuestionDBOpenHelper extends SQLiteOpenHelper {
         values.put(KEY_OPTB, medium.getOPTB());
         values.put(KEY_OPTC, medium.getOPTC());
 
-        // Inserting Row
         database.insert(TABLE_MEDIUM, null, values);
     }
 
     public void addHardQuestion(Question hard) {
-        // SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(KEY_QUES, hard.getQUESTION());
         values.put(KEY_ANSWER, hard.getANSWER());
@@ -204,12 +198,10 @@ public class QuestionDBOpenHelper extends SQLiteOpenHelper {
         values.put(KEY_OPTB, hard.getOPTB());
         values.put(KEY_OPTC, hard.getOPTC());
 
-        // Inserting Row
         database.insert(TABLE_HARD, null, values);
     }
 
     public void addPracticeQuestion(Question practice) {
-        // SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(KEY_QUES, practice.getQUESTION());
         values.put(KEY_ANSWER, practice.getANSWER());
@@ -217,12 +209,10 @@ public class QuestionDBOpenHelper extends SQLiteOpenHelper {
         values.put(KEY_OPTB, practice.getOPTB());
         values.put(KEY_OPTC, practice.getOPTC());
 
-        // Inserting Row
         database.insert(TABLE_PRACTICE, null, values);
     }
 
     public void addChallengeQuestion(Question challenge) {
-        // SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(KEY_QUES, challenge.getQUESTION());
         values.put(KEY_ANSWER, challenge.getANSWER());
@@ -230,30 +220,15 @@ public class QuestionDBOpenHelper extends SQLiteOpenHelper {
         values.put(KEY_OPTB, challenge.getOPTB());
         values.put(KEY_OPTC, challenge.getOPTC());
 
-        // Inserting Row
         database.insert(TABLE_CHALLENGE, null, values);
     }
 
     public void addRankingInformation(RankingInformation rankingInformation) {
-//        database = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-//        values.put(KEY_RANKING, rankingInformation.getRanking());
-//        values.put(KEY_ID, rankingInformation.getEmail());
         values.put(KEY_CHALLENGESCORE, rankingInformation.getChallengeScore());
 
         database.insert(TABLE_RANKINGINFORMATION, null, values);
     }
-
-//    public void updateRankingInformation(String email, int challengeScore) {
-//        database = this.getWritableDatabase();
-//        ContentValues values = new ContentValues();
-//
-//        values.put("email", email);
-//        values.put("score", challengeScore);
-//
-//        String email1[] = {email};
-//        database.update(TABLE_RANKINGINFORMATION,values,"player=?", email1);
-//    }
 
 
     public List<Question> getAllEasyQuestions() {
@@ -383,22 +358,15 @@ public class QuestionDBOpenHelper extends SQLiteOpenHelper {
         database = this.getReadableDatabase();
         Cursor cursor = database.rawQuery(selectQuery, null);
 
-//        int ranking = 1;
-
         if (cursor.moveToFirst()) {
             do {
                 RankingInformation rankingInformation = new RankingInformation();
 
-//                rankingInformation.setId(cursor.getInt(0));
-//                rankingInformation.setRanking(ranking);
-//                rankingInformation.setEmail(cursor.getString(0));
                 rankingInformation.setChallengeScore(cursor.getInt(0));
 
                 challengeScoreList.add(rankingInformation);
-//                ranking++;
             } while (cursor.moveToNext());
         }
-        // return quest list
         return challengeScoreList;
     }
 

@@ -2,7 +2,6 @@ package hitesh.asimplegame;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -23,9 +22,6 @@ public class SignInActivity extends Activity {
     private static final String TAG = "SignUpActivity";
 
     private FirebaseAuth mAuth;
-
-    SharedPreferences sharedPreferences = null;
-    SharedPreferences.Editor editor = null;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -69,42 +65,29 @@ public class SignInActivity extends Activity {
         }
     };
 
-
-
     private void signIn() {
         final String email = ((EditText) findViewById(R.id.emailEditText)).getText().toString();
         String password = ((EditText) findViewById(R.id.passwordEditText)).getText().toString();
 
-        if(email.length() >0 && password.length() >0) {
-        mAuth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d(TAG, "signInWithEmail : success");
-
-
-                            FirebaseUser user = mAuth.getCurrentUser();
-
-//                            Intent intent = new Intent(SignInActivity.this, MainPageActivity.class);
-//                            Bundle b = new Bundle();
-//                            b.putString("email", email);
-//                            intent.putExtras(b);
-
-//                            editor.putString("email", email);
-//                            editor.commit();
-
-                            startToast("Sign-ip is successful!");
-                            finishSignInActivity();
-                        } else {
-                            if (task.getException() != null) {
-                                startToast("Check your email or password. ");
+        if (email.length() > 0 && password.length() > 0) {
+            mAuth.signInWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                // Sign in success, update UI with the signed-in user's information
+                                Log.d(TAG, "signInWithEmail : success");
+                                FirebaseUser user = mAuth.getCurrentUser();
+                                startToast("Sign-ip is successful!");
+                                finishSignInActivity();
+                            } else {
+                                if (task.getException() != null) {
+                                    startToast("Check your email or password. ");
+                                }
                             }
                         }
-                    }
-                });
-            } else {
+                    });
+        } else {
             startToast("Please enter your email or password. ");
         }
 

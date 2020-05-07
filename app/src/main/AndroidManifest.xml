@@ -53,7 +53,7 @@
             android:name=".Setting"
             android:theme="@android:style/Theme.Dialog" />
         <activity
-            android:name=".MyPage"
+            android:name=".MyPageActivity"
             android:screenOrientation="portrait"/>
         <service android:name=".MusicService">
 

@@ -50,8 +50,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:textOff="배경음악 OFF"
-            android:textOn="배경음악 ON" />
+            android:soundEffectsEnabled="false"
+            android:textOff="BGM OFF"
+            android:textOn="BGM ON" />
 
     </LinearLayout>
     <!-- Notice -->

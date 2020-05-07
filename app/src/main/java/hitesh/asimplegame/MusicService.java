@@ -19,7 +19,7 @@ public class MusicService extends Service {
         super.onCreate();
 
 
-        mp = MediaPlayer.create(this, R.raw.bgm111);
+        mp = MediaPlayer.create(this, R.raw.BGM);
         mp.setLooping(false);
     }
 

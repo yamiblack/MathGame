@@ -93,7 +93,6 @@ public class QuestionDBOpenHelper extends SQLiteOpenHelper {
         addPracticeQuestion();
         addChallengeQuestion();
         addRankingInformation();
-
     }
 
     void addEasyQuestion() {

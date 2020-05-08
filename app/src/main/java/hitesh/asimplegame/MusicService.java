@@ -33,7 +33,6 @@ public class MusicService extends Service {
     public void onDestroy() {
         super.onDestroy();
         mp.stop();
-
     }
 }
 
